@@ -6,8 +6,8 @@ function Root() {
   return (
     <div>
       <Header />
-      <NavBar />
       <Outlet />
+      <NavBar />
     </div>
   )
 }
