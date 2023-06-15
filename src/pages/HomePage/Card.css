@@ -1,0 +1,57 @@
+
+@media (max-width: 767px) {
+  .wrapper {
+    width: 80vw;
+    height: 50vh;
+  }
+
+  .card-header {
+    height: 96px;
+    width: 100%;
+    display: flex;
+  }
+  
+  .profile-photo-wrapper {
+    height: 100%;
+    width: 96px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .profile-photo-wrapper > img {
+    width: 80%;
+    position: relative;
+    top: 0;
+    left: 12;
+    border-radius: 50%;
+  }
+
+  .community-name {
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    padding-left: 24px;
+    padding-top: 24px;
+  }
+
+  .community-name div:first-child {
+    font-weight: 700;
+  }
+
+  .card-body {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .card-body > img {
+    width: 94%;
+    position: relative;
+    top: 0;
+    left: 0;
+    border-radius: 24px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+  }
+}
