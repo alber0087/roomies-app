@@ -1,7 +1,17 @@
 import { useState } from 'react'
-import { Box, Button, Card, CardActions, CardContent, IconButton, TextField, Typography } from '@mui/material'
+import {
+  Box,
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  IconButton,
+  TextField,
+  Typography,
+} from '@mui/material'
 import './Login.css'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
+import { login } from '../../services/auth.service'
 
 function Login() {
   const [email, setEmail] = useState('')
@@ -20,6 +30,12 @@ function Login() {
   const handlePassword = (value) => {
     setPassword(value.target.value)
     console.log(password)
+  }
+
+  const logIn = async () => {
+    await login(email, password)
+    if (!localStorage.getItem('token')) alert('Error: user or password wrong')
+    else alert("You're in!")
   }
 
   return (
@@ -57,6 +73,7 @@ function Login() {
             fullWidth
             variant="contained"
             sx={{ backgroundColor: 'var(--secondary-color)' }}
+            onClick={logIn}
           >
             Login
           </Button>

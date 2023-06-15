@@ -10,6 +10,7 @@ import {
 import './SignupPage.css'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
 import { useState } from 'react'
+import { singup } from '../../services/auth.service'
 
 
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
@@ -20,12 +21,18 @@ const passRegex = /^(?=.*\d)(.{5,})\1$/
 
 function SignupPage() {
   const [isPassvisible, setIsPassVisible] = useState(false)
+  const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [repeatPassword, setRepeatPassword] = useState('')
   const [valid, setValid] = useState(false)
   const [validPassword, setValidPassword] = useState(false)
   const [validRepeatPassword, setValidRepeatPassword] = useState(false)
+
+  const validateName = (e) => {
+    const name = e.target.value
+    setName(name)
+  }
 
   const validatePassword = (e) => {
     const password = e.target.value
@@ -63,13 +70,6 @@ function SignupPage() {
       setValid(true)
     }
   }
-  const validatePower = () => {
-    if (valid !== true) {
-      alert('verify your email')
-    } else if (validPassword !== true) {
-      alert('verify your password')
-    }
-  }
 
   const formValidate = (e) => {
     e.preventDefault()
@@ -90,6 +90,20 @@ function SignupPage() {
     setIsPassVisible(!isPassvisible)
   }
 
+  const signUp = async () => {
+   if (valid !== true) {
+     alert('verify your email')
+   } else if (validPassword !== true) {
+     alert('verify your password')
+   }else {
+     await singup(name, email, password)
+     if(!localStorage.getItem('token')) alert('no tienes token')
+     else alert('Welcome')
+   }
+   
+  }
+
+  console.log(name)
   console.log(email)
   console.log(password)
 
@@ -111,6 +125,7 @@ function SignupPage() {
               }}
               size="large"
               label="Name"
+              onChange={validateName}
               variant="filled"
             />
             <TextField
@@ -175,7 +190,7 @@ function SignupPage() {
               style={{ backgroundColor: 'var(--secondary-color)' }}
               size="large"
               variant="contained"
-              onClick={validatePower}
+              onClick={signUp}
             >
               Create Account
             </Button>
