@@ -1,0 +1,15 @@
+.container-signup{
+  width: 390px;
+  height: 844px;
+}
+.input-signup{
+  background-color: var(--white-color);
+}
+
+.button-create{
+position: absolute;
+width: 346px;
+height: 66px;
+left: 14.5px;
+top: 542px;
+}
