@@ -1,5 +1,10 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+
+
 :root {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 16px;
   line-height: 1.5;
   font-weight: 500;
@@ -19,4 +24,10 @@
   --secondary-color: #398378;
   --white-color: #FFFFFF;
   --light-gray-color: #EEEEEE;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
 }
