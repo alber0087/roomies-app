@@ -1,0 +1,30 @@
+.login {
+    position: absolute;
+    width: 390px;
+    height: 844px;
+    left: 0;
+    top: 0;
+    background-color: var(--primary-color);
+}
+
+.login-card {
+    position: absolute;
+    width: 346px;
+    height: 296px;
+    left: 22px;
+    top: 280px;
+}
+
+.signup {
+    color: var(--secondary-color);
+    position: fixed;
+    left: 295px;
+    top: 535px;
+}
+
+.forgot-password {
+    color: #353535;
+    position: fixed;
+    left: 42px;
+    top: 535px;
+}
