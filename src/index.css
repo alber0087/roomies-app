@@ -22,3 +22,9 @@
   --white-color: #FFFFFF;
   --light-gray-color: #EEEEEE;
 }
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+}

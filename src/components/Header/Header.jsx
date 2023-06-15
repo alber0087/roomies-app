@@ -1,8 +1,15 @@
-
+import './Header.css'
+import logo from '../../assets/logo.png'
 
 function Header() {
   return (
-    <div>ROOMIES</div>
+    <>
+      <div className='header'>
+        <div className="logo">
+          <img src={logo}/>
+        </div>
+      </div>
+    </>
   )
 }
 
