@@ -3,8 +3,8 @@
   margin-bottom: -42px;
   width: 80vw;
   height: 60vh;
-  background-color: aqua;
   border-radius: 50px;
+  background-color: var(--white-color);
 }
 
 .card-header {
@@ -33,7 +33,7 @@
   display: flex;
   flex-direction: column;
   justify-content: stretch;
-  padding-left: 24px;
+  padding-left: 4px;
   padding-top: 24px;
 }
 
@@ -45,7 +45,6 @@
   position: relative;
   width: 100%;
   height: 76%;
-  background-color: violet;
   display: grid;
   place-items: center;
   grid-template-columns: 1fr 1fr;
@@ -69,15 +68,14 @@
 }
 
 .members-card {
-  background-color: aquamarine;
-  width: 300px;
+  width: 280px;
   height: 200px;
+  padding: 24px;
 }
 
 .community-card {
   width: 300px;
   height: 200px;
-  background-color: antiquewhite;
 }
 
 .map-container {
@@ -93,47 +91,21 @@
 
 @media (max-width: 767px) {
   .wrapper {
-    width: 80vw;
     height: 50vh;
   }
 
   .card-header {
     height: 96px;
-    width: 100%;
-    display: flex;
-  }
-
-  .profile-photo-wrapper {
-    height: 100%;
-    width: 96px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 
   .profile-photo-wrapper > img {
     width: 80%;
-    position: relative;
-    top: 0;
-    left: 12;
-    border-radius: 50%;
-  }
-
-  .community-name {
-    display: flex;
-    flex-direction: column;
-    justify-content: stretch;
-    padding-left: 24px;
-    padding-top: 24px;
-  }
-
-  .community-name div:first-child {
-    font-weight: 700;
   }
 
   .card-body {
     width: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
   }
