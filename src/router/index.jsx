@@ -16,14 +16,6 @@ const router = createBrowserRouter([
     errorElement: <NotFound />,
     children: [
       {
-        path: '/signup',
-        element: <SignupPage />,
-      },
-      {
-        path: '/login',
-        element: <Login />,
-      },
-      {
         path: '/dashboard',
         element: <HomePage />,
       },
@@ -40,6 +32,14 @@ const router = createBrowserRouter([
         element: <CreateCommunity />,
       },
     ],
+  },
+  {
+    path: '/signup',
+    element: <SignupPage />,
+  },
+  {
+    path: '/login',
+    element: <Login />,
   },
 ])
 

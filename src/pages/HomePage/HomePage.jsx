@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Snackbar } from '@mui/material'
 
 import Card from './Card'

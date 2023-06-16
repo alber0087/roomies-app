@@ -1,3 +1,7 @@
+import { useState } from 'react'
+import Header from '../../components/Header/Header'
+
+import { Visibility, VisibilityOff } from '@mui/icons-material'
 import {
   Button,
   Card,
@@ -7,15 +11,13 @@ import {
   IconButton,
   TextField,
 } from '@mui/material'
-import './SignupPage.css'
-import { Visibility, VisibilityOff } from '@mui/icons-material'
-import { useState } from 'react'
-import { singup } from '../../services/auth.service'
 
+import './SignupPage.css'
+
+import { singup } from '../../services/auth.service'
 
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
 const passRegex = /^(?=.*\d)(.{5,})\1$/
-
 
 
 
@@ -100,7 +102,6 @@ function SignupPage() {
      if(!localStorage.getItem('token')) alert('no tienes token')
      else alert('Welcome')
    }
-   
   }
 
   console.log(name)
@@ -109,94 +110,95 @@ function SignupPage() {
 
   return (
     <>
-      <Card
-        sx={{ backgroundColor: '#8ABE53', borderRadius: '0' }}
-        className="container-signup"
-      >
-        <FormControl className="wrapper-signup" onSubmit={formValidate}>
-          <CardContent>
-            <TextField
-              className="input-signup"
-              style={{
-                position: 'absolute',
-                width: ' 326px',
-                left: '32px',
-                top: '234px',
-              }}
-              size="large"
-              label="Name"
-              onChange={validateName}
-              variant="filled"
-            />
-            <TextField
-              style={{
-                position: 'absolute',
-                width: ' 326px',
-                left: '32px',
-                top: '321px',
-              }}
-              className="input-signup"
-              margin="dense"
-              label="email"
-              color={valid ? 'info' : 'error'}
-              value={email}
-              onChange={validateEmail}
-              variant="filled"
-            />
-            <TextField
-              style={{
-                position: 'absolute',
-                width: ' 326px',
-                left: '32px',
-                top: '407px',
-              }}
-              value={password}
-              className="input-signup"
-              size="large"
-              label="Password"
-              variant="filled"
-              margin="dense"
-              type={isPassvisible ? 'text' : 'password'}
-              onChange={validatePassword}
-              InputProps={{
-                endAdornment: (
-                  <IconButton onClick={handleClick}>
-                    {isPassvisible ? <Visibility /> : <VisibilityOff />}
-                  </IconButton>
-                ),
-              }}
-            />
-            <TextField
-              style={{
-                position: 'absolute',
-                width: ' 326px',
-                left: '32px',
-                top: '494px',
-              }}
-              value={repeatPassword}
-              type={isPassvisible ? 'text' : 'password'}
-              color={validRepeatPassword ? 'info' : 'error'}
-              onChange={validateRepeatPassword}
-              className="input-signup"
-              size="large"
-              label="Repeat Password"
-              variant="filled"
-            />
-          </CardContent>
+      <Header />
+      <div className="signup-container">
+        <Card
+          sx={{
+            backgroundColor: 'var(--primary-color)',
+            borderRadius: '20px',
+            boxShadow: 'none',
+          }}
+          className="container-signup"
+        >
+          <FormControl className="wrapper-signup" onSubmit={formValidate}>
+            <div className="signup-title">Sign up</div>
+            <CardContent>
+              <TextField
+                className="input-signup"
+                style={{
+                  width: '326px',
+                  height: '46px',
+                }}
+                size="small"
+                label="Name"
+                onChange={validateName}
+                variant="filled"
+              />
+              <TextField
+                style={{
+                  width: ' 326px',
+                  height: '46px',
+                }}
+                className="input-signup"
+                size="small"
+                margin="dense"
+                label="email"
+                color={valid ? 'info' : 'error'}
+                value={email}
+                onChange={validateEmail}
+                variant="filled"
+              />
+              <TextField
+                style={{
+                  width: ' 326px',
+                  height: '46px',
+                }}
+                value={password}
+                className="input-signup"
+                size="small"
+                label="Password"
+                variant="filled"
+                margin="dense"
+                type={isPassvisible ? 'text' : 'password'}
+                onChange={validatePassword}
+                InputProps={{
+                  endAdornment: (
+                    <IconButton onClick={handleClick}>
+                      {isPassvisible ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  ),
+                }}
+              />
+              <TextField
+                style={{
+                  width: ' 326px',
+                  height: '46px',
+                }}
+                value={repeatPassword}
+                type={isPassvisible ? 'text' : 'password'}
+                color={validRepeatPassword ? 'info' : 'error'}
+                onChange={validateRepeatPassword}
+                className="input-signup"
+                size="small"
+                label="Repeat Password"
+                variant="filled"
+              />
+            </CardContent>
 
-          <CardActions>
-            <Button
-              className="button-create"
-              style={{ backgroundColor: 'var(--secondary-color)' }}
-              size="large"
-              variant="contained"
-              onClick={signUp}
-            >
-              Create Account
-            </Button>
-          </CardActions>
-        </FormControl>
-      </Card>
+            <CardActions>
+              <Button
+                className="button-create"
+                sx={{ backgroundColor: 'var(--secondary-color)' }}
+                size="large"
+                variant="contained"
+                onClick={signUp}
+              >
+                Create Account
+              </Button>
+            </CardActions>
+          </FormControl>
+        </Card>
+      </div>
     </>
   )
 }

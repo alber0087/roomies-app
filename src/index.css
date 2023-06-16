@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 :root {
@@ -7,25 +6,21 @@
   line-height: 1.5;
   font-weight: 500;
 
-  padding: 0;
-  margin: 0;
-
-  box-sizing: border-box;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 
-  --primary-color: #8ABE53;
+  --primary-color: #8abe53;
   --secondary-color: #398378;
-  --white-color: #FFFFFF;
-  --light-gray-color: #EEEEEE;
+  --white-color: #ffffff;
+  --light-gray-color: #eeeeee;
 }
 
 body {
   margin: 0;
   padding: 0;
   width: 100vw;
+  box-sizing: border-box;
 }

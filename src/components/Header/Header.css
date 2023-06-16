@@ -18,10 +18,6 @@
     overflow-x: hidden;
   }
 
-  .header {
-    background-color: var(--primary-color);
-  }
-
   .logo img {
     width: 360px;
     position: absolute;
