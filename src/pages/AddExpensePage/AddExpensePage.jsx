@@ -1,8 +1,29 @@
-import { Box, Button, TextField } from '@mui/material'
+import { Box, TextField } from '@mui/material'
 import EuroIcon from '@mui/icons-material/Euro'
+import './AddExpensePage.css'
+import { useState } from 'react'
+import { addExpense } from '../../services/expenses.service'
+import PrimaryBtn from '../../components/PrimaryBtn/PrimaryBtn'
 import './AddExpensePage.css'
 
 function AddExpensePage() {
+  const [expense, setExpense] = useState('')
+  const [price, setPrice] = useState(0)
+
+  const handleExpense = (e) => {
+    setExpense(e.target.value)
+    console.log(expense)
+  }
+
+  const handlePrice = (e) => {
+    setPrice(e.target.value)
+    console.log(price)
+  }
+
+  const addExpenseFunc = async () => {
+    await addExpense(expense, parseFloat(price.replace(',', '.')))
+  }
+
   return (
     <Box>
       <Box>
@@ -16,6 +37,7 @@ function AddExpensePage() {
             left: '124px',
             top: '166px',
           }}
+          onChange={handleExpense}
         />
       </Box>
       <Box>
@@ -23,28 +45,17 @@ function AddExpensePage() {
         <EuroIcon sx={{ position: 'absolute', left: '68px', top: '281px' }} />
         <TextField
           variant="filled"
-          label="0,00"
+          label="0,00" /* Se queda de titulo */
           sx={{
             position: 'absolute',
             width: '220px',
             left: '124px',
             top: '263px',
           }}
+          onChange={handlePrice}
         />
       </Box>
-      <Button
-        variant="contained"
-        sx={{
-          position: 'absolute',
-          left: '22px',
-          top: '400px',
-          width: '322px',
-          height: '48px',
-          backgroundColor: 'var(--secondary-color)',
-        }}
-      >
-        Add Expense
-      </Button>
+      <PrimaryBtn  value="Add Expense" callToAction={addExpenseFunc} />
     </Box>
   )
 }
