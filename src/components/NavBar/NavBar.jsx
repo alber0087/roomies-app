@@ -1,10 +1,12 @@
+/* eslint-disable react/prop-types */
 import { Link } from 'react-router-dom'
 import './NavBar.css'
 
-function NavBar() {
+function NavBar({ isWideScreen }) {
+  console.log(isWideScreen)
   return (
     <>
-      <div className="navbar">
+      <div className={isWideScreen ? 'wide-screen-nav' : 'mobile-nav'}>
         <ul>
           <li>
             <Link to='/dashboard'>Home</Link>

@@ -10,18 +10,22 @@ import AddExpensePage from "../pages/AddExpensePage/AddExpensePage"
 import CreateCommunity from "../pages/CreateCommunityPage/CreateCommunity"
 
 const router = createBrowserRouter([
-  { 
+  {
     path: '/',
     element: <Root />,
     errorElement: <NotFound />,
     children: [
       {
         path: '/signup',
-        element: <SignupPage />
+        element: <SignupPage />,
       },
       {
-        path: 'login',
-        element: <Login />
+        path: '/login',
+        element: <Login />,
+      },
+      {
+        path: '/dashboard',
+        element: <HomePage />,
       },
       {
         path: '/expenses',
@@ -29,22 +33,14 @@ const router = createBrowserRouter([
       },
       {
         path: '/expenses/addexpense',
-        element: <AddExpensePage />
+        element: <AddExpensePage />,
       },
       {
         path: '/create',
-        element: <CreateCommunity />
-      }
-    ]
+        element: <CreateCommunity />,
+      },
+    ],
   },
-  {
-    children: [
-      {
-        path: '/dashboard',
-        element: <HomePage />,
-      }
-    ]
-  }
 ])
 
 export default router
