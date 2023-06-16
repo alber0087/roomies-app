@@ -8,6 +8,7 @@ import {
 } from '@mui/material'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import './Expenses.css'
+import { Link } from 'react-router-dom'
 
 function Expenses() {
   return (
@@ -55,7 +56,7 @@ function Expenses() {
           backgroundColor: 'var(--secondary-color)',
         }}
       >
-        Add Expense
+        <Link to='/expenses/addexpense'>Add Expense</Link>
       </Button>
     </Box>
   )
