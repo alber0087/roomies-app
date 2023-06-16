@@ -5,6 +5,7 @@ import NotFound from "../components/NotFound/NotFound"
 import SignupPage from "../pages/SignupPage/SignupPage"
 import Login from "../pages/Login/Login"
 import HomePage from '../pages/HomePage/HomePage'
+import CreateCommunity from "../pages/CreateCommunityPage/CreateCommunity"
 
 const router = createBrowserRouter([
   { 
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
       {
         path: 'login',
         element: <Login />
+      },
+      {
+        path: '/create',
+        element: <CreateCommunity/>
       }
     ]
   },
