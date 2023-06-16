@@ -6,6 +6,7 @@ import SignupPage from "../pages/SignupPage/SignupPage"
 import Login from "../pages/Login/Login"
 import HomePage from '../pages/HomePage/HomePage'
 import Expenses from "../pages/ExpensesPage/Expenses"
+import AddExpensePage from "../pages/AddExpensePage/AddExpensePage"
 
 const router = createBrowserRouter([
   { 
@@ -23,7 +24,11 @@ const router = createBrowserRouter([
       },
       {
         path: '/expenses',
-        element: <Expenses />
+        element: <Expenses />,
+      },
+      {
+        path: '/expenses/addexpense',
+        element: <AddExpensePage />
       }
     ]
   },

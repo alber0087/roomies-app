@@ -1,27 +1,7 @@
-.header-expenses {
-    position: absolute;
-    width: 282px;
-    height: 106px;
-    left: 53px;
-    top: 130px;
-    background-color: yellow;
-    box-shadow: none;
-    transition: none;
-}
-
 .total-lent {
     font-weight: bold;
 }
 
 .bold-title {
     font-weight: bold;
-}
-
-.add-expense-button {
-    position: absolute;
-    left: 22px;
-    top: 655px;
-    width: 322px;
-    height: 48px;
-    background-color: var(--secondary-color);
 }

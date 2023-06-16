@@ -6,13 +6,24 @@ import {
   Toolbar,
   Typography,
 } from '@mui/material'
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import './Expenses.css'
 
 function Expenses() {
   return (
     <Box>
-      <AppBar className="header-expenses">
+      <AppBar
+        sx={{
+          position: 'absolute',
+          width: '282px',
+          height: '106px',
+          left: '53px',
+          top: '130px',
+          backgroundColor: 'black',
+          boxShadow: 'none',
+          transition: 'none',
+        }}
+      >
         <Toolbar>
           <IconButton
             size="large"
@@ -33,7 +44,19 @@ function Expenses() {
           Total lent <span className="total-lent">0,00 €</span>
         </Typography>
       </AppBar>
-      <Button variant='contained' className='add-expense-button'>Add Expense</Button>
+      <Button
+        variant="contained"
+        sx={{
+          position: 'absolute',
+          left: '22px',
+          top: '655px',
+          width: '322px',
+          height: '48px',
+          backgroundColor: 'var(--secondary-color)',
+        }}
+      >
+        Add Expense
+      </Button>
     </Box>
   )
 }

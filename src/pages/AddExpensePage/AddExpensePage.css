@@ -1,0 +1,17 @@
+.square-description {
+    position: absolute;
+    width: 46px;
+    height: 46px;
+    left: 58px;
+    top: 167px;
+    background-color: #D9D9D9;
+}
+
+.square-euro {
+    position: absolute;
+    width: 46px;
+    height: 46px;
+    left: 58px;
+    top: 270px;
+    background-color: #D9D9D9;
+}
