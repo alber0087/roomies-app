@@ -2,6 +2,8 @@ import {
   AppBar,
   Box,
   Button,
+  Card,
+  CardContent,
   IconButton,
   Toolbar,
   Typography,
@@ -9,8 +11,30 @@ import {
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import './Expenses.css'
 import { Link } from 'react-router-dom'
+import { deleteExpense, expensePaid, getExpenses } from '../../services/expenses.service'
+import { useEffect, useState } from 'react'
 
 function Expenses() {
+  const [expenses, setExpenses] = useState([])
+
+  const listExpenses = async () => {
+    const res = await getExpenses()
+
+    setExpenses(res.expenses)
+  }
+
+  const clicko = (id) => {
+    deleteExpense(id)
+  }
+
+  const clickoPaid = (id) => {
+    expensePaid(id)
+  }
+
+  useEffect(() => {
+    listExpenses()
+  }, [])
+
   return (
     <Box>
       <AppBar
@@ -45,6 +69,27 @@ function Expenses() {
           Total lent <span className="total-lent">0,00 €</span>
         </Typography>
       </AppBar>
+      <div>
+        <div>
+          {expenses?.length > 0 &&
+            expenses.map((e) => (
+              <Card key={e.id} sx={{ width: '400px' }}>
+                <CardContent>
+                  <Typography variant="h5" component="div">
+                    {e.name}
+                  </Typography>
+                  <Typography variant="body">{e.price}€</Typography>
+                  <Button variant="contained" onClick={() => clicko(e.id)}>
+                    DELETE
+                  </Button>
+                  <Button variant='contained' onClick={() => clickoPaid(e.id)}>
+                    PAID
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+        </div>
+      </div>
       <Button
         variant="contained"
         sx={{
@@ -56,7 +101,7 @@ function Expenses() {
           backgroundColor: 'var(--secondary-color)',
         }}
       >
-        <Link to='/expenses/addexpense'>Add Expense</Link>
+        <Link to="/expenses/addexpense">Add Expense</Link>
       </Button>
     </Box>
   )
