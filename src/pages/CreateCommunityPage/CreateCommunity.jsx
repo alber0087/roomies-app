@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import './Createcommunity.css'
 import {
-  Button,
   Card,
   CardActions,
   CardContent,
@@ -10,6 +9,7 @@ import {
 } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { createCommunity } from '../../services/community.service'
+import PrimaryBtn from '../../components/PrimaryBtn/PrimaryBtn'
 
 /* const regexRoom = /^[1-9]$/ */
 
@@ -17,7 +17,7 @@ function CreateCommunity() {
   const [name, setName] = useState('')
   const [address, setAddress] = useState('')
   const [rooms, setRooms] = useState(0)
-  
+
   const navigate = useNavigate()
   /* const [image, setImage] = useState(null) */
 
@@ -46,9 +46,15 @@ function CreateCommunity() {
  */
 
   const createCommunitY = async () => {
-    await createCommunity(name, address, rooms)
-    if (!localStorage.getItem('token')) alert('no tienes token')
-    else navigate('/dashboard')
+    if (name.length <= 0) {
+      return alert('The name cannot empty')
+    }
+
+     else {
+      await createCommunity(name, address, rooms)
+      if (!localStorage.getItem('token')) alert('no tienes token')
+      else navigate('/dashboard')
+    }
   }
 
   return (
@@ -131,15 +137,10 @@ function CreateCommunity() {
           </CardContent>
 
           <CardActions>
-            <Button
-              className="button-create"
-              style={{ backgroundColor: 'var(--secondary-color)' }}
-              size="large"
-              variant="contained"
-              onClick={createCommunitY}
-            >
-              Create Community
-            </Button>
+            <PrimaryBtn
+              callToAction={createCommunitY}
+              value={'Create Community'}
+            ></PrimaryBtn>
           </CardActions>
         </FormControl>
       </Card>
