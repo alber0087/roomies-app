@@ -7,35 +7,56 @@ import PrimaryBtn from '../../components/PrimaryBtn/PrimaryBtn'
 import './HomePage.css'
 
 import { getCommunityId } from '../../services/community.service'
-
+import { getUsersByCommunityId } from '../../services/user.service'
 
 
 function HomePage() {
   const [open, setOpen] = useState(false)
-  const [communityId, setCommunityId] = useState({})
+  const [users, setUsers] = useState([])
+  const [community, setCommunity] = useState({})
 
-  const handleClick = () => {
+  const generateInvitationLink = () => {
+    const baseUrl = 'https://roomiesapi-production.up.railway.app/api/communities/profile'
+    const invitationLink = `${baseUrl}/${community.id}`
+
+    navigator.clipboard.writeText(invitationLink)
+
     setOpen(true)
+
+    console.log(community.id)
+    console.log(invitationLink)
   }
 
   const getCommunityInfo = async () => {
     const res = await getCommunityId()
-    setCommunityId(res)
+    setCommunity(res)
     if (!localStorage.getItem('token')) alert('no tienes token')
   }
 
+const getCommunityUsers = async () => {
+  try {
+    const res = await getUsersByCommunityId(community.id)
+    setUsers(res)
+  } catch (error) {
+    console.error('Error fetching community users:', error)
+  }
+}
+
   useEffect(() => {
     getCommunityInfo()
+    getCommunityUsers()
   }, [])
-
-  console.log(communityId)
   
   const message = 'QR Code successfully copied to clipboard!!'
 
   return (
     <div className="container">
-      <Card />
-      <PrimaryBtn value="Generate invitation code" callToAction={handleClick} />
+      <Card 
+        community={community}
+        users={users}
+      />
+
+      <PrimaryBtn value="Generate invitation code" callToAction={generateInvitationLink} />
       <Snackbar 
         open={open} 
         onClose={() => setOpen(false)} 
