@@ -100,7 +100,7 @@ function SignupPage() {
       alert('verify your password')
     } else {
       await signup(name, email, password)
-      if (!localStorage.getItem('token')) alert('no tienes token')
+      if (!localStorage.getItem('token')) alert('Error')
       else navigate('/invite')
     }
   }
