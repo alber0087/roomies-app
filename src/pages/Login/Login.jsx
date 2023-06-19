@@ -31,12 +31,10 @@ function Login() {
 
   const handleEmail = (value) => {
     setEmail(value.target.value)
-    console.log(email)
   }
 
   const handlePassword = (value) => {
     setPassword(value.target.value)
-    console.log(password)
   }
 
   const logIn = async () => {
