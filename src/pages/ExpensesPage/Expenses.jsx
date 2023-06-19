@@ -23,12 +23,12 @@ function Expenses() {
     setExpenses(res.expenses)
   }
 
-  const clicko = (id) => {
+  const deleteExpenseFunc = (id) => {
     deleteExpense(id)
   }
 
-  const clickoPaid = (id) => {
-    expensePaid(id)
+  const expensePaidFunc = async (id) => {    
+    await expensePaid(id)
   }
 
   useEffect(() => {
@@ -79,10 +79,10 @@ function Expenses() {
                     {e.name}
                   </Typography>
                   <Typography variant="body">{e.price}€</Typography>
-                  <Button variant="contained" onClick={() => clicko(e.id)}>
+                  <Button variant="contained" onClick={() => deleteExpenseFunc(e.id)}>
                     DELETE
                   </Button>
-                  <Button variant='contained' onClick={() => clickoPaid(e.id)}>
+                  <Button variant='contained' onClick={() => expensePaidFunc(e.id)}>
                     PAID
                   </Button>
                 </CardContent>
