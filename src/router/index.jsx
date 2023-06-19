@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom"
+import { createBrowserRouter, redirect } from "react-router-dom"
 
 import Root from "../layout/"
 import NotFound from "../components/NotFound/NotFound"
@@ -10,10 +10,16 @@ import AddExpensePage from "../pages/AddExpensePage/AddExpensePage"
 import CreateCommunity from "../pages/CreateCommunityPage/CreateCommunity"
 import InviteUser from "../pages/InviteUserPage/InviteUser"
 
+const checkLogged = () => {
+  if (!localStorage.getItem('token')) return redirect('/login')
+  else return null
+}
+
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Root />,
+    loader: checkLogged,
     errorElement: <NotFound />,
     children: [
       {

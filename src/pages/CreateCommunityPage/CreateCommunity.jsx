@@ -8,7 +8,7 @@ import {
   FormControl,
   TextField,
 } from '@mui/material'
-
+import { useNavigate } from 'react-router-dom'
 import { createCommunity } from '../../services/community.service'
 
 /* const regexRoom = /^[1-9]$/ */
@@ -17,6 +17,8 @@ function CreateCommunity() {
   const [name, setName] = useState('')
   const [address, setAddress] = useState('')
   const [rooms, setRooms] = useState(0)
+  
+  const navigate = useNavigate()
   /* const [image, setImage] = useState(null) */
 
   const handleName = (e) => {
@@ -46,7 +48,7 @@ function CreateCommunity() {
   const createCommunitY = async () => {
     await createCommunity(name, address, rooms)
     if (!localStorage.getItem('token')) alert('no tienes token')
-    else alert('Community created')
+    else navigate('/dashboard')
   }
 
   return (
