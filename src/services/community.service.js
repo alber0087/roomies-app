@@ -15,15 +15,14 @@ export const createCommunity = async (name, address, rooms) => {
   }
 }
 
-export const getCommunityId = async ({id}) => {
+export const getCommunityId = async () => {
   try {
-    const { data } = await api.get('/communities/:id', {id}, {
+    const { data } = await api.get('/communities/profile', {
       headers: {
         token: localStorage.getItem('token')
       }
     })
-    localStorage.setItem('token', data.token)
-    console.log(data)
+    return data
   } catch (error) {
     console.error('Cannot Get Community', error)
   }
