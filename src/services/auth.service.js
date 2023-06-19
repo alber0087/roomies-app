@@ -9,7 +9,7 @@ export const login = async (email, password) => {
   }
 }
 
-export const singup = async (name, email, password) => {
+export const signup = async (name, email, password) => {
   try {
     const { data } = await api.post('/auth/signup', { firstName: name, email, password })
     localStorage.setItem('token', data.token)

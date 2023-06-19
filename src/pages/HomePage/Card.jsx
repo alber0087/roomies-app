@@ -5,6 +5,8 @@ import communityPic from '../../assets/apartment.jpeg'
 
 import './Card.css'
 
+const API_KEY = 'AIzaSyAw-aTPzbceFSmmS4_JNjSO0j7UHv4sgP4'
+
 function Card() {
   const [showCard, setShowCard] = useState(false)
 
@@ -41,7 +43,9 @@ function Card() {
         <div className="members-card">Community Members:</div>
         {showCard && (
           <div className="map-container">
-            <img src="https://maps.googleapis.com/maps/api/staticmap?center=40.714728,-73.998672&format=gif&zoom=14&size=300x200&key=AIzaSyAw-aTPzbceFSmmS4_JNjSO0j7UHv4sgP4" />
+            <img
+              src={`https://maps.googleapis.com/maps/api/staticmap?center=40.714728,-73.998672&format=gif&zoom=14&size=300x200&key=${API_KEY}`}
+            />
           </div>
         )}
       </div>

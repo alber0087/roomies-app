@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import Header from '../../components/Header/Header'
 
 import { Visibility, VisibilityOff } from '@mui/icons-material'
@@ -22,6 +23,8 @@ function Login() {
   const [password, setPassword] = useState('')
   const [isPassVisible, setIsPassVisible] = useState(false)
 
+  const navigate = useNavigate()
+
   const handleClick = () => {
     setIsPassVisible(!isPassVisible)
   }
@@ -39,7 +42,7 @@ function Login() {
   const logIn = async () => {
     await login(email, password)
     if (!localStorage.getItem('token')) alert('Error: user or password wrong')
-    else alert("You're in!")
+    else navigate('/dashboard')
   }
 
   return (
@@ -90,7 +93,11 @@ function Login() {
             </Button>
           </CardActions>
           <Typography className="forgot-password">Forgot password</Typography>
-          <Typography className="signup">Sign up</Typography>
+          <Typography className="signup">
+            <Link to='/signup'>
+              Sign up
+            </Link>
+          </Typography>
         </Card>
       </div>
     </>

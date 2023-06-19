@@ -14,45 +14,40 @@ import { createCommunity } from '../../services/community.service'
 /* const regexRoom = /^[1-9]$/ */
 
 function CreateCommunity() {
-const [name, setName] = useState('')
-const [address, setAddress] = useState('')
-const [rooms, setRooms] = useState(0)
-/* const [image, setImage] = useState(null) */
+  const [name, setName] = useState('')
+  const [address, setAddress] = useState('')
+  const [rooms, setRooms] = useState(0)
+  /* const [image, setImage] = useState(null) */
 
-const handleName = (e) => {
-  const name = e.target.value
-  setName(name)
-}
+  const handleName = (e) => {
+    const name = e.target.value
+    setName(name)
+  }
 
-const handleAddress = (e) => {
-  const address = e.target.value
-  setAddress(address)
- 
-}
+  const handleAddress = (e) => {
+    const address = e.target.value
+    setAddress(address)
+  }
 
-const handleRoom = (e) => {
-  e.preventDefault()
-const rooms = parseInt(e.target.value)
+  const handleRoom = (e) => {
+    e.preventDefault()
+    const rooms = parseInt(e.target.value)
 
-setRooms(rooms)
-}
+    setRooms(rooms)
+  }
 
-/* 
+  /* 
   const handleImage = (e) => {
     const image = e.target.files[0]
     setImage(image)
   }
  */
 
-const createCommunitY = async () => {
-  await createCommunity(name, address, rooms)
-   if (!localStorage.getItem('token')) alert('no tienes token')
-   else alert('Community created')
-}
-
-
-
-
+  const createCommunitY = async () => {
+    await createCommunity(name, address, rooms)
+    if (!localStorage.getItem('token')) alert('no tienes token')
+    else alert('Community created')
+  }
 
   return (
     <>
@@ -99,7 +94,7 @@ const createCommunitY = async () => {
                 left: '32px',
                 top: '407px',
               }}
-              type='number'
+              type="number"
               value={rooms}
               className="input-createCommunity"
               margin="dense"
@@ -129,7 +124,7 @@ const createCommunitY = async () => {
               size="large"
               margin="dense"
               variant="filled"
-/*               onChange={handleImage} */
+              /*               onChange={handleImage} */
             />
           </CardContent>
 
