@@ -41,6 +41,7 @@ const router = createBrowserRouter([
       {
         path: '/create',
         element: <CreateCommunity />,
+        
       },
     ],
   },
