@@ -17,6 +17,7 @@
     "@mui/material": "^5.13.5",
     "@react-google-maps/api": "^2.18.1",
     "axios": "^1.4.0",
+    "cities.json": "^1.1.21",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.13.0"
