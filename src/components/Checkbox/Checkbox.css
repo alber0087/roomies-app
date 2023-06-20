@@ -1,0 +1,9 @@
+.checkbox {
+  display: flex;
+  margin-right: 8px;
+}
+
+input[type='checkbox'] {
+  border-radius: 0;
+  width: 16px;
+}

@@ -7,6 +7,7 @@ import Login from "../pages/Login/Login"
 import HomePage from '../pages/HomePage/HomePage'
 import Expenses from "../pages/ExpensesPage/Expenses"
 import AddExpensePage from "../pages/AddExpensePage/AddExpensePage"
+import Tasks from '../pages/Tasks/Tasks'
 import CreateCommunity from "../pages/CreateCommunityPage/CreateCommunity"
 import InviteUser from "../pages/InviteUserPage/InviteUser"
 
@@ -35,23 +36,26 @@ const router = createBrowserRouter([
         element: <AddExpensePage />,
       },
       {
-        path: '/invite',
-        element: <InviteUser />
-      },
-      {
-        path: '/create',
-        element: <CreateCommunity />,
-        
-      },
+        path: '/tasks',
+        element: <Tasks />
+      }
     ],
+  },
+  {
+    path: '/login',
+    element: <Login />,
   },
   {
     path: '/signup',
     element: <SignupPage />,
   },
   {
-    path: '/login',
-    element: <Login />,
+    path: '/invite',
+    element: <InviteUser />,
+  },
+  {
+    path: '/create',
+    element: <CreateCommunity />,
   },
 ])
 

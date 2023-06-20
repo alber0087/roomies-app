@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import './Createcommunity.css'
+import './CreateCommunity.css'
 import {
   Card,
   CardActions,
@@ -48,9 +48,7 @@ function CreateCommunity() {
   const createCommunitY = async () => {
     if (name.length <= 0) {
       return alert('The name cannot empty')
-    }
-
-     else {
+    } else {
       await createCommunity(name, address, rooms)
       if (!localStorage.getItem('token')) alert('no tienes token')
       else navigate('/dashboard')
@@ -59,91 +57,50 @@ function CreateCommunity() {
 
   return (
     <>
-      <Card
-        sx={{ backgroundColor: '#8ABE53', borderRadius: '0' }}
-        className="container-createcommunity"
-      >
-        <FormControl className="wrapper-signup">
-          <CardContent>
-            <TextField
-              className="input-createCommunity"
-              style={{
-                position: 'absolute',
-                width: ' 326px',
-                left: '32px',
-                top: '234px',
-              }}
-              type="text"
-              value={name}
-              size="large"
-              label="Community name"
-              variant="filled"
-              onChange={handleName}
-            />
-            <TextField
-              className="input-createCommunity"
-              style={{
-                position: 'absolute',
-                width: ' 326px',
-                left: '32px',
-                top: '321px',
-              }}
-              type="text"
-              value={address}
-              size="large"
-              label="Address"
-              variant="filled"
-              onChange={handleAddress}
-            />
-            <TextField
-              style={{
-                position: 'absolute',
-                width: ' 326px',
-                left: '32px',
-                top: '407px',
-              }}
-              type="number"
-              value={rooms}
-              className="input-createCommunity"
-              margin="dense"
-              label="Rooms"
-              variant="filled"
-              onChange={handleRoom}
-            />
-            <label
-              style={{
-                position: 'absolute',
-                width: ' 326px',
-                left: '32px',
-                top: '478px',
-              }}
-            >
-              Upload Image
-            </label>
-            <TextField
-              style={{
-                position: 'absolute',
-                width: ' 326px',
-                left: '32px',
-                top: '494px',
-              }}
-              className="file-input input-createCommunity"
-              type="file"
-              size="large"
-              margin="dense"
-              variant="filled"
-              /*               onChange={handleImage} */
-            />
-          </CardContent>
+      <div className="create-container">
+          <FormControl className='wrapper-create'>
+            <CardContent>
+              <TextField
+                type="text"
+                value={name}
+                label="Community name"
+                variant="filled"
+                onChange={handleName}
+              />
+              <TextField
+                type="text"
+                value={address}
+                label="Address"
+                variant="filled"
+                onChange={handleAddress}
+              />
+              <TextField
+                type="number"
+                value={rooms}
+                className="input-createCommunity"
+                margin="dense"
+                label="Rooms"
+                variant="filled"
+                onChange={handleRoom}
+              />
+              <div>Upload Image</div>
+              <TextField
+                className="file-input input-createCommunity"
+                type="file"
+                margin="dense"
+                variant="filled"
+                /*               onChange={handleImage} */
+              />
+            </CardContent>
 
-          <CardActions>
-            <PrimaryBtn
-              callToAction={createCommunitY}
-              value={'Create Community'}
-            ></PrimaryBtn>
-          </CardActions>
-        </FormControl>
-      </Card>
+            <CardActions>
+              <PrimaryBtn
+                callToAction={createCommunitY}
+                value={'Create Community'}
+              />
+            </CardActions>
+          </FormControl>
+      </div>
     </>
   )
 }
