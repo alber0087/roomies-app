@@ -1,10 +1,7 @@
 import { useState } from 'react'
 import './CreateCommunity.css'
 import {
-<<<<<<< HEAD
 
-=======
->>>>>>> alber
   CardActions,
   CardContent,
   FormControl,
