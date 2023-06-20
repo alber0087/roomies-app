@@ -1,18 +1,36 @@
-import { Button, Card, CardActions, CardContent, FormControl, TextField } from '@mui/material'
+import {
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  FormControl,
+  TextField,
+} from '@mui/material'
 import './InviteUser.css'
 import Header from '../../components/Header/Header'
 import { useNavigate } from 'react-router-dom'
+import { joinCommunity } from '../../services/community.service'
+import { useState } from 'react'
 
 function InviteUser() {
-const navigate = useNavigate()
+  const [id, setId] = useState('')
+  const navigate = useNavigate()
 
-const handleCreate = () => {
-  if (!localStorage.getItem('token')) alert('You need login first')  
-  else navigate('/create')
-}
+  const handleInvite = (e) => {
+    const id = e.target.value
+    setId(id)
+  }
 
+  const handleCreate = () => {
+    if (!localStorage.getItem('token')) alert('You need login first')
+    else navigate('/create')
+  }
 
-
+  const joinToCommunity = async () => {
+    await joinCommunity(id)
+    if (!localStorage.getItem('token')) alert('You need login first')
+    navigate('/dashboard')
+  }
 
   return (
     <>
@@ -35,6 +53,7 @@ const handleCreate = () => {
                   width: '326px',
                   height: '46px',
                 }}
+                onChange={handleInvite}
                 size="small"
                 label="Code"
                 variant="filled"
@@ -50,6 +69,15 @@ const handleCreate = () => {
                 onClick={handleCreate}
               >
                 Create Community
+              </Button>
+              <Button
+                className="button-create"
+                sx={{ backgroundColor: 'var(--secondary-color)' }}
+                size="large"
+                variant="contained"
+                onClick={joinToCommunity}
+              >
+                Join
               </Button>
             </CardActions>
           </FormControl>

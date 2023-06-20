@@ -33,7 +33,7 @@ const router = createBrowserRouter([
       {
         path: '/expenses/addexpense',
         element: <AddExpensePage />,
-      },
+      }
     ],
   },
   {

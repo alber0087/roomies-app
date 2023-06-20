@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
 import './PrimaryBtn.css'
 
-function PrimaryBtn({ value, callToAction}) {
+function PrimaryBtn({ style, value, callToAction}) {
   return (
     <div>
-      <button className='primary-btn' onClick={callToAction}>{value}</button>
+      <button style={{style}} className='primary-btn' onClick={callToAction}>{value}</button>
     </div>
   )
 }
