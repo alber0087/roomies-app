@@ -53,7 +53,6 @@ function InviteUser() {
                 variant="filled"
               />
             </CardContent>
-
             <PrimaryBtn value="Join community" callToAction={joinToCommunity} />
             <PrimaryBtn value="Create community" callToAction={handleCreate} />
           </FormControl>
