@@ -7,10 +7,10 @@ import {
   TextField,
 } from '@mui/material'
 import './InviteUser.css'
-import Header from '../../components/Header/Header'
 import { useNavigate } from 'react-router-dom'
 import { joinCommunity } from '../../services/community.service'
 import { useState } from 'react'
+import PrimaryBtn from '../../components/PrimaryBtn/PrimaryBtn'
 
 function InviteUser() {
   const [id, setId] = useState('')
@@ -34,52 +34,28 @@ function InviteUser() {
 
   return (
     <>
-      <Header />
-      <div className="signup-container">
+      <div className="invite-container">
         <Card
           sx={{
             backgroundColor: 'var(--primary-color)',
             borderRadius: '20px',
             boxShadow: 'none',
           }}
-          className="container-signup"
+          className="container-invite"
         >
           <FormControl className="wrapper-signup">
             <div className="signup-title">Invitation Code</div>
             <CardContent>
               <TextField
                 className="input-signup"
-                style={{
-                  width: '326px',
-                  height: '46px',
-                }}
                 onChange={handleInvite}
-                size="small"
                 label="Code"
                 variant="filled"
               />
             </CardContent>
 
-            <CardActions>
-              <Button
-                className="button-create"
-                sx={{ backgroundColor: 'var(--secondary-color)' }}
-                size="large"
-                variant="contained"
-                onClick={handleCreate}
-              >
-                Create Community
-              </Button>
-              <Button
-                className="button-create"
-                sx={{ backgroundColor: 'var(--secondary-color)' }}
-                size="large"
-                variant="contained"
-                onClick={joinToCommunity}
-              >
-                Join
-              </Button>
-            </CardActions>
+            <PrimaryBtn value="Join community" callToAction={joinToCommunity} />
+            <PrimaryBtn value="Create community" callToAction={handleCreate} />
           </FormControl>
         </Card>
       </div>

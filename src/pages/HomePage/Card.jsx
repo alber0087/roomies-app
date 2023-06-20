@@ -59,7 +59,7 @@ function Card({ community, users }) {
           <img src={profilePic} />
         </div>
         <div className="community-name">
-          <div>My Community</div>
+          <div>{community.name}</div>
           <div>Las Palmas de GC</div>
         </div>
       </div>
@@ -72,7 +72,7 @@ function Card({ community, users }) {
         {showCard && (
           <div className="map-container">
             <img
-              src={`https://maps.googleapis.com/maps/api/staticmap?center=LasMesas,LasPalmasdeGranCanaria&format=gif&zoom=16&size=300x200&key=${API_KEY}`}
+              src={`https://maps.googleapis.com/maps/api/staticmap?center=${community.address},LasPalmasdeGranCanaria&format=gif&zoom=16&size=300x200&key=${API_KEY}`}
             />
           </div>
         )}
