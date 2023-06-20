@@ -13,9 +13,12 @@ import './Expenses.css'
 import { Link } from 'react-router-dom'
 import { deleteExpense, expensePaid, getExpenses } from '../../services/expenses.service'
 import { useEffect, useState } from 'react'
+import { getUserLogged, getUsersByCommunity } from '../../services/user.service'
 
 function Expenses() {
   const [expenses, setExpenses] = useState([])
+  const [userLogged, setUserLogged] = useState('')
+  const [usersCommunity, setUsersCommunity] = useState(0)
 
   const listExpenses = async () => {
     const res = await getExpenses()
@@ -23,17 +26,64 @@ function Expenses() {
     setExpenses(res.expenses)
   }
 
-  const deleteExpenseFunc = (id) => {
-    deleteExpense(id)
+  const deleteExpenseFunc = async (id) => {
+    await deleteExpense(id)
   }
 
   const expensePaidFunc = async (id) => {    
     await expensePaid(id)
   }
+  
+  const getUserLoggedFunc = async () => {
+    const res = await getUserLogged()
+    setUserLogged(res)
+  }
+
+  const getUsersCommunity = async () => {
+    const res = await getUsersByCommunity()
+    setUsersCommunity(res.users.length)
+  }
 
   useEffect(() => {
     listExpenses()
+    getUserLoggedFunc()
+    getUsersCommunity()
   }, [])
+
+  const calculateTotal = () => {
+    let result = 0
+    expenses.map((e) => {
+      if (e.community_expense.status === 'Pending' && e.community_expense.userId === userLogged.id) {
+        result += (usersCommunity - 1) * (e.price / usersCommunity)
+      } else if (e.community_expense.status === 'Pending' && e.community_expense.userId !== userLogged.id) {
+        result -= e.price / usersCommunity
+      }
+    })
+    return result
+  }
+
+  const calculateExpense = (e) => {
+      if (e.community_expense.userId === userLogged.id) {
+        return (usersCommunity - 1) * (e.price / usersCommunity)
+      } else if (e.community_expense.userId !== userLogged.id) {
+        return e.price / usersCommunity * -1
+      }
+  }
+
+  const lentOrWhat = () => {
+    if (calculateTotal() > 0) {
+      return 'Total lent'
+    } else if (calculateTotal() < 0) {
+      return 'Total owe'
+    } else {
+      return 'No debts'
+    }
+  }
+
+  console.log(expenses)
+  console.log(userLogged)
+  console.log(usersCommunity)
+  calculateTotal()
 
   return (
     <Box>
@@ -66,7 +116,7 @@ function Expenses() {
           </Typography>
         </Toolbar>
         <Typography sx={{ padding: '10px 0 0 10px' }}>
-          Total lent <span className="total-lent">0,00 €</span>
+          {lentOrWhat()} <span className="total-lent">{calculateTotal().toString().replace('.', ',')} €</span>
         </Typography>
       </AppBar>
       <div>
@@ -78,7 +128,7 @@ function Expenses() {
                   <Typography variant="h5" component="div">
                     {e.name}
                   </Typography>
-                  <Typography variant="body">{e.price}€</Typography>
+                  <Typography variant="body">{calculateExpense(e)} €</Typography>
                   <Button variant="contained" onClick={() => deleteExpenseFunc(e.id)}>
                     DELETE
                   </Button>
