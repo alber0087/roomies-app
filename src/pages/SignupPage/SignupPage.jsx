@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import Header from '../../components/Header/Header'
 
 import { Visibility, VisibilityOff } from '@mui/icons-material'
@@ -11,6 +11,7 @@ import {
   FormControl,
   IconButton,
   TextField,
+  Typography,
 } from '@mui/material'
 
 import './SignupPage.css'
@@ -197,6 +198,9 @@ function SignupPage() {
                 Create Account
               </Button>
             </CardActions>
+            <Typography className="signup">
+              <Link to="/login">Login</Link>
+            </Typography>
           </FormControl>
         </Card>
       </div>

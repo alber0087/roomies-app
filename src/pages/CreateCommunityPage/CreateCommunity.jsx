@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import './Createcommunity.css'
+import './CreateCommunity.css'
 import {
   Card,
   CardActions,
@@ -57,8 +57,10 @@ function CreateCommunity() {
   const createCommunitY = async () => {
     if (name.length <= 0) {
       return alert('The name cannot empty')
-    } else {
-      await createCommunity(name, selectedCity, address, rooms)
+    }
+
+     else {
+      await createCommunity(name, address, rooms)
       if (!localStorage.getItem('token')) alert('no tienes token')
       else navigate('/dashboard')
     }
@@ -78,7 +80,7 @@ function CreateCommunity() {
                 position: 'absolute',
                 width: ' 326px',
                 left: '32px',
-                top: '157px',
+                top: '234px',
               }}
               type="text"
               value={name}
@@ -93,7 +95,7 @@ function CreateCommunity() {
                 position: 'absolute',
                 width: ' 326px',
                 left: '32px',
-                top: '331px',
+                top: '321px',
               }}
               type="text"
               value={address}
@@ -102,15 +104,12 @@ function CreateCommunity() {
               variant="filled"
               onChange={handleAddress}
             />
-
-            <SelectCity onCitySelected={handleCitySelection} />
-
             <TextField
               style={{
                 position: 'absolute',
                 width: ' 326px',
                 left: '32px',
-                top: '417px',
+                top: '407px',
               }}
               type="number"
               value={rooms}
@@ -125,7 +124,7 @@ function CreateCommunity() {
                 position: 'absolute',
                 width: ' 326px',
                 left: '32px',
-                top: '488px',
+                top: '478px',
               }}
             >
               Upload Image
@@ -135,7 +134,7 @@ function CreateCommunity() {
                 position: 'absolute',
                 width: ' 326px',
                 left: '32px',
-                top: '504px',
+                top: '494px',
               }}
               className="file-input input-createCommunity"
               type="file"
@@ -146,14 +145,14 @@ function CreateCommunity() {
             />
           </CardContent>
 
-          <CardActions>
-            <PrimaryBtn
-              callToAction={createCommunitY}
-              value={'Create Community'}
-            ></PrimaryBtn>
-          </CardActions>
-        </FormControl>
-      </Card>
+            <CardActions>
+              <PrimaryBtn
+                callToAction={createCommunitY}
+                value={'Create Community'}
+              />
+            </CardActions>
+          </FormControl>
+      </div>
     </>
   )
 }
