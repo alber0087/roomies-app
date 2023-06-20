@@ -1,6 +1,6 @@
 import axios from 'axios'
 
 export const api = axios.create({
-  baseURL: 'https://roomiesapi-production.up.railway.app/api',
+  baseURL: 'http://localhost:3000/api',
   timeout: 3000,
 })

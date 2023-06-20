@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import './CreateCommunity.css'
 import {
-  Card,
+
   CardActions,
   CardContent,
   FormControl,
@@ -60,7 +60,7 @@ function CreateCommunity() {
     }
 
      else {
-      await createCommunity(name, address, rooms)
+      await createCommunity(name, selectedCity, address, rooms)
       if (!localStorage.getItem('token')) alert('no tienes token')
       else navigate('/dashboard')
     }
@@ -68,20 +68,11 @@ function CreateCommunity() {
 
   return (
     <>
-      <Card
-        sx={{ backgroundColor: '#8ABE53', borderRadius: '0' }}
-        className="container-createcommunity"
-      >
-        <FormControl className="wrapper-signup">
+      <div className="create-container">
+        <FormControl className="wrapper-create">
           <CardContent>
             <TextField
               className="input-createCommunity"
-              style={{
-                position: 'absolute',
-                width: ' 326px',
-                left: '32px',
-                top: '234px',
-              }}
               type="text"
               value={name}
               size="large"
@@ -89,14 +80,13 @@ function CreateCommunity() {
               variant="filled"
               onChange={handleName}
             />
+            
+            <SelectCity 
+            onCitySelected={handleCitySelection} 
+            />
+
             <TextField
               className="input-createCommunity"
-              style={{
-                position: 'absolute',
-                width: ' 326px',
-                left: '32px',
-                top: '321px',
-              }}
               type="text"
               value={address}
               size="large"
@@ -105,12 +95,6 @@ function CreateCommunity() {
               onChange={handleAddress}
             />
             <TextField
-              style={{
-                position: 'absolute',
-                width: ' 326px',
-                left: '32px',
-                top: '407px',
-              }}
               type="number"
               value={rooms}
               className="input-createCommunity"
@@ -119,23 +103,8 @@ function CreateCommunity() {
               variant="filled"
               onChange={handleRoom}
             />
-            <label
-              style={{
-                position: 'absolute',
-                width: ' 326px',
-                left: '32px',
-                top: '478px',
-              }}
-            >
-              Upload Image
-            </label>
+            <label className="input-createCommunity">Upload Image</label>
             <TextField
-              style={{
-                position: 'absolute',
-                width: ' 326px',
-                left: '32px',
-                top: '494px',
-              }}
               className="file-input input-createCommunity"
               type="file"
               size="large"
@@ -145,13 +114,13 @@ function CreateCommunity() {
             />
           </CardContent>
 
-            <CardActions>
-              <PrimaryBtn
-                callToAction={createCommunitY}
-                value={'Create Community'}
-              />
-            </CardActions>
-          </FormControl>
+          <CardActions>
+            <PrimaryBtn
+              callToAction={createCommunitY}
+              value={'Create Community'}
+            />
+          </CardActions>
+        </FormControl>
       </div>
     </>
   )
