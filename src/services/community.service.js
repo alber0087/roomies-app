@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { api } from './api'
 
 export const joinCommunity = async (id) => {
@@ -23,7 +24,6 @@ export const createCommunity = async (name, selectedCity, address, rooms) => {
         },
       }
     )
-    localStorage.setItem('token', data.token)
   } catch (error) {
     console.error('Cannot Create Community', error)
   }

@@ -35,7 +35,7 @@ function HomePage() {
 
 const getCommunityUsers = async () => {
   try {
-    const res = await getUsersByCommunityId(community.id)
+    const res = await getUsersByCommunityId()
     setUsers(res)
   } catch (error) {
     console.error('Error fetching community users:', error)
@@ -55,7 +55,6 @@ const getCommunityUsers = async () => {
         community={community}
         users={users}
       />
-
       <PrimaryBtn value="Generate invitation code" callToAction={generateInvitationLink} />
       <Snackbar 
         open={open} 
