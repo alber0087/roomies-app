@@ -14,9 +14,14 @@ function TaskCard({ task, title, onTaskStatusChange, onTaskDeletion }) {
  
   return (
     <div className="task-wrapper">
-      <CheckBox callToAction={handleCheckboxChange}/>
+      <CheckBox 
+        onChange={handleCheckboxChange}
+        defaultChecked={task.completed}
+      />
+      <span className={task.completed ? 'done' : 'undone'}>
       {title}
-      <DeleteBtn callToAction={handleDeleteButtonClick}/>
+      </span>
+      <DeleteBtn onClick={handleDeleteButtonClick}/>
     </div>
   )
 }

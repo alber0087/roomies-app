@@ -1,11 +1,12 @@
+/* eslint-disable react/prop-types */
 import './DeleteBtn.css'
 
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined'
 
-function DeleteBtn() {
+function DeleteBtn({ onClick }) {
   return (
     <div className='delete-btn'>
-      <DeleteOutlineOutlinedIcon />
+      <DeleteOutlineOutlinedIcon  onClick={onClick}/>
     </div>
   )
 }

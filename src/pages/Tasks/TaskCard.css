@@ -15,3 +15,7 @@ body {
 .task-wrapper:hover {
   background-color: var(--white-color);
 }
+
+.done {
+  text-decoration: line-through;
+}

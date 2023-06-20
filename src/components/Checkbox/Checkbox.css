@@ -1,9 +1,13 @@
-.checkbox {
+.checkbox-container {
   display: flex;
   margin-right: 8px;
 }
 
-input[type='checkbox'] {
+.checkbox-container input {
+  cursor: pointer;
+}
+
+input[type='checkbox']:after {
   border-radius: 0;
   width: 16px;
 }
