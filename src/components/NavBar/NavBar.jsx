@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import './NavBar.css'
 
 function NavBar({ isWideScreen }) {
-  console.log(isWideScreen)
   return (
     <>
       <div className={isWideScreen ? 'wide-screen-nav' : 'mobile-nav'}>

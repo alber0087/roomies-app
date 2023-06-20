@@ -36,7 +36,7 @@ export const getCommunityId = async () => {
         token: localStorage.getItem('token'),
       },
     })
-    return data
+    return data.community
   } catch (error) {
     console.error('Cannot Get Community', error)
   }

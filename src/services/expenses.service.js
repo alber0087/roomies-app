@@ -43,13 +43,14 @@ export const deleteExpense = async (id) => {
   }
 }
 
-export const expensePaid = async (id) => {
+export const expensePaid = async (id) => { 
   try {
-    await api.put(`/expenses/profile/${id}`, {
+    await api.put(`/expenses/profile/${id}`, {}, {
       headers: {
         token: localStorage.getItem('token'),
       },
     })
+
   } catch (error) {
     console.error('Errado', error)
   }
