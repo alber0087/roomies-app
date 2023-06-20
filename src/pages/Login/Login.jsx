@@ -40,7 +40,7 @@ function Login() {
   const logIn = async () => {
     await login(email, password)
     if (!localStorage.getItem('token')) alert('Error: user or password wrong')
-    else navigate('/dashboard')
+    else navigate('/invite')
   }
 
   return (
