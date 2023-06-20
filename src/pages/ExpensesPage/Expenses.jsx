@@ -11,14 +11,25 @@ import {
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import './Expenses.css'
 import { Link } from 'react-router-dom'
-import { deleteExpense, expensePaid, getExpenses } from '../../services/expenses.service'
+import {
+  deleteExpense,
+  expensePaid,
+  getExpenses,
+} from '../../services/expenses.service'
 import { useEffect, useState } from 'react'
 import { getUserLogged, getUsersByCommunity } from '../../services/user.service'
+import { getCommunityId } from '../../services/community.service'
 
 function Expenses() {
   const [expenses, setExpenses] = useState([])
   const [userLogged, setUserLogged] = useState('')
   const [usersCommunity, setUsersCommunity] = useState(0)
+  const [community, setCommunity] = useState('')
+
+  const getCommunityInfo = async () => {
+    const res = await getCommunityId()
+    setCommunity(res)
+  }
 
   const listExpenses = async () => {
     const res = await getExpenses()
@@ -30,10 +41,10 @@ function Expenses() {
     await deleteExpense(id)
   }
 
-  const expensePaidFunc = async (id) => {    
+  const expensePaidFunc = async (id) => {
     await expensePaid(id)
   }
-  
+
   const getUserLoggedFunc = async () => {
     const res = await getUserLogged()
     setUserLogged(res)
@@ -48,14 +59,21 @@ function Expenses() {
     listExpenses()
     getUserLoggedFunc()
     getUsersCommunity()
+    getCommunityInfo()
   }, [])
 
   const calculateTotal = () => {
     let result = 0
     expenses.map((e) => {
-      if (e.community_expense.status === 'Pending' && e.community_expense.userId === userLogged.id) {
+      if (
+        e.community_expense.status === 'Pending' &&
+        e.community_expense.userId === userLogged.id
+      ) {
         result += (usersCommunity - 1) * (e.price / usersCommunity)
-      } else if (e.community_expense.status === 'Pending' && e.community_expense.userId !== userLogged.id) {
+      } else if (
+        e.community_expense.status === 'Pending' &&
+        e.community_expense.userId !== userLogged.id
+      ) {
         result -= e.price / usersCommunity
       }
     })
@@ -63,27 +81,22 @@ function Expenses() {
   }
 
   const calculateExpense = (e) => {
-      if (e.community_expense.userId === userLogged.id) {
-        return (usersCommunity - 1) * (e.price / usersCommunity)
-      } else if (e.community_expense.userId !== userLogged.id) {
-        return e.price / usersCommunity * -1
-      }
+    if (e.community_expense.userId === userLogged.id) {
+      return (usersCommunity - 1) * (e.price / usersCommunity)
+    } else if (e.community_expense.userId !== userLogged.id) {
+      return (e.price / usersCommunity) * -1
+    }
   }
 
   const lentOrWhat = () => {
-    if (calculateTotal() > 0) {
+    if (calculateTotal().toFixed(2) > 0) {
       return 'Total lent'
-    } else if (calculateTotal() < 0) {
+    } else if (calculateTotal().toFixed(2) < 0) {
       return 'Total owe'
     } else {
       return 'No debts'
     }
   }
-
-  console.log(expenses)
-  console.log(userLogged)
-  console.log(usersCommunity)
-  calculateTotal()
 
   return (
     <Box>
@@ -110,13 +123,16 @@ function Expenses() {
             <AccountCircleIcon />
           </IconButton>
           <Typography sx={{ flexGrow: 1 }}>
-            <span className="bold-title">My Community</span>
+            <span className="bold-title">{community.name}</span>
             <br />
-            Las Palmas de G.C.
+            {community.city}
           </Typography>
         </Toolbar>
         <Typography sx={{ padding: '10px 0 0 10px' }}>
-          {lentOrWhat()} <span className="total-lent">{calculateTotal().toString().replace('.', ',')} €</span>
+          {lentOrWhat()}{' '}
+          <span className="total-lent">
+            {calculateTotal().toFixed(2).replace('.', ',')} €
+          </span>
         </Typography>
       </AppBar>
       <div>
@@ -128,11 +144,19 @@ function Expenses() {
                   <Typography variant="h5" component="div">
                     {e.name}
                   </Typography>
-                  <Typography variant="body">{calculateExpense(e)} €</Typography>
-                  <Button variant="contained" onClick={() => deleteExpenseFunc(e.id)}>
+                  <Typography variant="body">
+                    {calculateExpense(e).toFixed(2)} €
+                  </Typography>
+                  <Button
+                    variant="contained"
+                    onClick={() => deleteExpenseFunc(e.id)}
+                  >
                     DELETE
                   </Button>
-                  <Button variant='contained' onClick={() => expensePaidFunc(e.id)}>
+                  <Button
+                    variant="contained"
+                    onClick={() => expensePaidFunc(e.id)}
+                  >
                     PAID
                   </Button>
                 </CardContent>
