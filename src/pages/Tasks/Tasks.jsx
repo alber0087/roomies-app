@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import PrimaryBtn from '../../components/PrimaryBtn/PrimaryBtn'
 import TaskCard from './TaskCard'
+import AddTaskForm from './AddTaskForm'
 import './Tasks.css'
 
 import { getTasks } from '../../services/task.service'
@@ -10,14 +11,16 @@ function Tasks() {
     {
       id: 1,
       title: 'Comprar comida',
-      completed: true
-    }, 
+      completed: true,
+    },
     {
       id: 2,
       title: 'Hacer la colada',
-      completed: false
-    }
+      completed: false,
+    },
   ])
+  const [isAddFormVisible, setIsAddFormVisible] = useState(false)
+  const [isTasksVisible, setIsTasksVisible] = useState(true)
 
   const listTasks = async () => {
     const res = await getTasks()
@@ -37,7 +40,7 @@ function Tasks() {
           completed: !task.completed,
         }
       }
-      return task  
+      return task
     })
     setTasks([...updatedList])
   }
@@ -47,22 +50,35 @@ function Tasks() {
     setTasks(updatedList)
   }
 
+  const handleAddTaskClick = () => {
+    setIsAddFormVisible(!isAddFormVisible)
+    setIsTasksVisible(!isTasksVisible)
+  }
+
+  const handleAddTaskSubmit = (newTask) => {
+    setTasks([...tasks, newTask])
+    setIsAddFormVisible(false)
+  }
+
   return (
     <div className="container">
-      <div className="wrapper tasks-wrapper">
-        <div className="tasks-list">
-          {tasks.map((task) => (
-            <TaskCard
-              key={task.id}
-              title={task.title}
-              task={task}
-              onTaskStatusChange={handleTaskStatusChange}
-              onTaskDeletion={handleTaskDeletion}
-            />
-          ))}
+      {isTasksVisible && (
+        <div className="wrapper tasks-wrapper">
+          <div className="tasks-list">
+            {tasks.map((task) => (
+              <TaskCard
+                key={task.id}
+                title={task.title}
+                task={task}
+                onTaskStatusChange={handleTaskStatusChange}
+                onTaskDeletion={handleTaskDeletion}
+              />
+            ))}
+          </div>
         </div>
-      </div>
-      <PrimaryBtn value="Add Task" />
+      )}
+      {isAddFormVisible && <AddTaskForm onSubmit={handleAddTaskSubmit} />}
+      <PrimaryBtn value="Add Task" callToAction={handleAddTaskClick} />
     </div>
   )
 }
