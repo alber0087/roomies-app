@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import './CreateCommunity.css'
 import {
-  Card,
   CardActions,
   CardContent,
   FormControl,
