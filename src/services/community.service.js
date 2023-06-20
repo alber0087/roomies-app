@@ -14,7 +14,7 @@ export const joinCommunity = async (id) => {
 
 export const createCommunity = async (name, selectedCity, address, rooms) => {
   try {
-    const { data } = await api.post(
+    await api.post(
       '/communities/profile',
       { name, city: selectedCity, address, rooms },
       {
@@ -23,7 +23,6 @@ export const createCommunity = async (name, selectedCity, address, rooms) => {
         },
       }
     )
-    localStorage.setItem('token', data.token)
   } catch (error) {
     console.error('Cannot Create Community', error)
   }

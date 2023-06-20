@@ -17,12 +17,12 @@ export default function SelectCity({ onCitySelected }) {
 
   useEffect(() => {
     listFilter()
+    handleCitySelection(search)
   }, [search])
 
   const handleSearch = (e) => {
     const value = e.target.value
     setSearch(value)
-    handleCitySelection(search)
   }
 
   const handleCitySelection = (city) => {
