@@ -1,4 +1,7 @@
 import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
   AppBar,
   Box,
   Button,
@@ -23,7 +26,8 @@ import { getCommunityId } from '../../services/community.service'
 function Expenses() {
   const [expenses, setExpenses] = useState([])
   const [userLogged, setUserLogged] = useState('')
-  const [usersCommunity, setUsersCommunity] = useState(0)
+  const [usersCommunity, setUsersCommunity] = useState('')
+  const [totalUsersCommunity, setTotalUsersCommunity] = useState(0)
   const [community, setCommunity] = useState('')
 
   const getCommunityInfo = async () => {
@@ -52,13 +56,19 @@ function Expenses() {
 
   const getUsersCommunity = async () => {
     const res = await getUsersByCommunity()
-    setUsersCommunity(res.users.length)
+    setUsersCommunity(res.users)
+  }
+
+  const getTotalUsersCommunity = async () => {
+    const res = await getUsersByCommunity()
+    setTotalUsersCommunity(res.users.length)
   }
 
   useEffect(() => {
     listExpenses()
     getUserLoggedFunc()
     getUsersCommunity()
+    getTotalUsersCommunity()
     getCommunityInfo()
   }, [])
 
@@ -69,12 +79,12 @@ function Expenses() {
         e.community_expense.status === 'Pending' &&
         e.community_expense.userId === userLogged.id
       ) {
-        result += (usersCommunity - 1) * (e.price / usersCommunity)
+        result += (totalUsersCommunity - 1) * (e.price / totalUsersCommunity)
       } else if (
         e.community_expense.status === 'Pending' &&
         e.community_expense.userId !== userLogged.id
       ) {
-        result -= e.price / usersCommunity
+        result -= e.price / totalUsersCommunity
       }
     })
     return result
@@ -82,19 +92,86 @@ function Expenses() {
 
   const calculateExpense = (e) => {
     if (e.community_expense.userId === userLogged.id) {
-      return (usersCommunity - 1) * (e.price / usersCommunity)
+      return (totalUsersCommunity - 1) * (e.price / totalUsersCommunity)
     } else if (e.community_expense.userId !== userLogged.id) {
-      return (e.price / usersCommunity) * -1
+      return (e.price / totalUsersCommunity) * -1
     }
   }
 
-  const lentOrWhat = () => {
+  const lentOrOwe = () => {
     if (calculateTotal().toFixed(2) > 0) {
       return 'Total lent'
     } else if (calculateTotal().toFixed(2) < 0) {
       return 'Total owe'
     } else {
       return 'No debts'
+    }
+  }
+
+  const debtDivision = (e) => {
+    if (e.community_expense.userId === userLogged.id) {
+      return (
+        <>
+          <Typography variant="text">
+            I paid {e.price} € and I owe{' '}
+            {((e.price / totalUsersCommunity) * -1)
+              .toFixed(2)
+              .replace('.', ',')}{' '}
+            €<br></br>
+          </Typography>
+          {usersCommunity.map((i) => {
+            if (i.id !== userLogged.id) {
+              return (
+                <Typography key={i.id} variant="text">
+                  {i.firstName} owes{' '}
+                  {((e.price / totalUsersCommunity) * -1)
+                    .toFixed(2)
+                    .replace('.', ',')}{' '}
+                  €<br></br>
+                </Typography>
+              )
+            }
+          })}
+        </>
+      )
+    } else {
+      return (
+        <>
+          {usersCommunity.map((i) => {
+            if (i.id === userLogged.id) {
+              return (
+                <Typography key={i.id}>
+                  I owe{' '}
+                  {((e.price / totalUsersCommunity) * -1)
+                    .toFixed(2)
+                    .replace('.', ',')}{' '}
+                  €<br></br>
+                </Typography>
+              )
+            } else if (i.id === e.userId) {
+              return (
+                <Typography key={i.id}>
+                  {i.firstName} paid {e.price} € and he/she owes{' '}
+                  {((e.price / totalUsersCommunity) * -1)
+                    .toFixed(2)
+                    .replace('.', ',')}{' '}
+                  €<br></br>
+                </Typography>
+              )
+            } else {
+              return (
+                <Typography key={i.id}>
+                  {i.firstName} owes{' '}
+                  {((e.price / totalUsersCommunity) * -1)
+                    .toFixed(2)
+                    .replace('.', ',')}{' '}
+                  €<br></br>
+                </Typography>
+              )
+            }
+          })}
+        </>
+      )
     }
   }
 
@@ -129,7 +206,7 @@ function Expenses() {
           </Typography>
         </Toolbar>
         <Typography sx={{ padding: '10px 0 0 10px' }}>
-          {lentOrWhat()}{' '}
+          {lentOrOwe()}{' '}
           <span className="total-lent">
             {calculateTotal().toFixed(2).replace('.', ',')} €
           </span>
@@ -139,28 +216,33 @@ function Expenses() {
         <div>
           {expenses?.length > 0 &&
             expenses.map((e) => (
-              <Card key={e.id} sx={{ width: '400px' }}>
-                <CardContent>
-                  <Typography variant="h5" component="div">
-                    {e.name}
-                  </Typography>
-                  <Typography variant="body">
-                    {calculateExpense(e).toFixed(2)} €
-                  </Typography>
-                  <Button
-                    variant="contained"
-                    onClick={() => deleteExpenseFunc(e.id)}
-                  >
-                    DELETE
-                  </Button>
-                  <Button
-                    variant="contained"
-                    onClick={() => expensePaidFunc(e.id)}
-                  >
-                    PAID
-                  </Button>
-                </CardContent>
-              </Card>
+              <Accordion key={e.id}>
+                <AccordionSummary>
+                  <Card sx={{ width: '400px' }}>
+                    <CardContent>
+                      <Typography variant="h5" component="div">
+                        {e.name}
+                      </Typography>
+                      <Typography variant="body">
+                        {calculateExpense(e).toFixed(2)} €
+                      </Typography>
+                      <Button
+                        variant="contained"
+                        onClick={() => deleteExpenseFunc(e.id)}
+                      >
+                        DELETE
+                      </Button>
+                      <Button
+                        variant="contained"
+                        onClick={() => expensePaidFunc(e.id)}
+                      >
+                        PAID
+                      </Button>
+                    </CardContent>
+                  </Card>
+                </AccordionSummary>
+                <AccordionDetails>{debtDivision(e)}</AccordionDetails>
+              </Accordion>
             ))}
         </div>
       </div>
