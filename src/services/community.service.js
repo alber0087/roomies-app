@@ -41,3 +41,5 @@ export const getCommunityId = async () => {
     console.error('Cannot Get Community', error)
   }
 }
+
+

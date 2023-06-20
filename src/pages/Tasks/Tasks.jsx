@@ -6,29 +6,20 @@ import './Tasks.css'
 import { getTasks } from '../../services/task.service'
 
 function Tasks() {
-  const [tasks, setTasks] = useState([
-    {
-      id: 1,
-      title: 'Comprar comida',
-      completed: true
-    }, 
-    {
-      id: 2,
-      title: 'Hacer la colada',
-      completed: false
-    }
-  ])
+  const [tasks, setTasks] = useState([])
+
+
 
   const listTasks = async () => {
     const res = await getTasks()
     setTasks(res)
-    console.log(tasks)
+    
   }
 
   useEffect(() => {
     listTasks()
   }, [])
-
+console.log(tasks)
   const handleTaskStatusChange = (taskId) => {
     const updatedList = tasks.map((task) => {
       if (task.id === taskId) {
@@ -54,7 +45,7 @@ function Tasks() {
           {tasks.map((task) => (
             <TaskCard
               key={task.id}
-              title={task.title}
+              title={task.name}
               task={task}
               onTaskStatusChange={handleTaskStatusChange}
               onTaskDeletion={handleTaskDeletion}
