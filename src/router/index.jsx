@@ -34,23 +34,23 @@ const router = createBrowserRouter([
         path: '/expenses/addexpense',
         element: <AddExpensePage />,
       },
-      {
-        path: '/invite',
-        element: <InviteUser />
-      },
-      {
-        path: '/create',
-        element: <CreateCommunity />,
-      },
     ],
+  },
+  {
+    path: '/login',
+    element: <Login />,
   },
   {
     path: '/signup',
     element: <SignupPage />,
   },
   {
-    path: '/login',
-    element: <Login />,
+    path: '/invite',
+    element: <InviteUser />,
+  },
+  {
+    path: '/create',
+    element: <CreateCommunity />,
   },
 ])
 

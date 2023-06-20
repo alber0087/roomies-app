@@ -48,7 +48,8 @@ function CreateCommunity() {
   const createCommunitY = async () => {
     await createCommunity(name, address, rooms)
     if (!localStorage.getItem('token')) alert('no tienes token')
-    else navigate('/dashboard')
+    /*else navigate('/dashboard') */
+    console.log('Comunidad creada')
   }
 
   return (
