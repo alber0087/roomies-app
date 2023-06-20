@@ -1,0 +1,11 @@
+body {
+  box-sizing: content-box;
+}
+
+.task-wrapper {
+  background-color: aquamarine;
+  width: calc(100% - 24px);
+  padding: 12px;
+  border-radius: 12px;
+  display: flex;
+}
