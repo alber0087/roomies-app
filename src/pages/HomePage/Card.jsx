@@ -42,7 +42,7 @@ function Card({ community, users }) {
     return (
       <div className="members-card bold">
         Community Members:
-        {users.map((user) => {
+        {users && users.map((user) => {
           return (
             <div key={user.id}>{user.firstName}</div>
           )

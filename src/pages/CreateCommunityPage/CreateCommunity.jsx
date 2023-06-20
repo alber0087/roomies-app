@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './Createcommunity.css'
 import {
   Card,
@@ -11,12 +11,21 @@ import { useNavigate } from 'react-router-dom'
 import { createCommunity } from '../../services/community.service'
 import PrimaryBtn from '../../components/PrimaryBtn/PrimaryBtn'
 
+import SelectCity from './SelectCity/SelectCity'
+
 /* const regexRoom = /^[1-9]$/ */
 
 function CreateCommunity() {
   const [name, setName] = useState('')
   const [address, setAddress] = useState('')
   const [rooms, setRooms] = useState(0)
+  const [selectedCity, setSelectedCity] = useState('')
+
+  const handleCitySelection = (city) => {
+    setSelectedCity(city)
+  }
+
+  console.log(selectedCity)
 
   const navigate = useNavigate()
   /* const [image, setImage] = useState(null) */
@@ -48,10 +57,8 @@ function CreateCommunity() {
   const createCommunitY = async () => {
     if (name.length <= 0) {
       return alert('The name cannot empty')
-    }
-
-     else {
-      await createCommunity(name, address, rooms)
+    } else {
+      await createCommunity(name, selectedCity, address, rooms)
       if (!localStorage.getItem('token')) alert('no tienes token')
       else navigate('/dashboard')
     }
@@ -71,7 +78,7 @@ function CreateCommunity() {
                 position: 'absolute',
                 width: ' 326px',
                 left: '32px',
-                top: '234px',
+                top: '157px',
               }}
               type="text"
               value={name}
@@ -86,7 +93,7 @@ function CreateCommunity() {
                 position: 'absolute',
                 width: ' 326px',
                 left: '32px',
-                top: '321px',
+                top: '331px',
               }}
               type="text"
               value={address}
@@ -95,12 +102,15 @@ function CreateCommunity() {
               variant="filled"
               onChange={handleAddress}
             />
+
+            <SelectCity onCitySelected={handleCitySelection} />
+
             <TextField
               style={{
                 position: 'absolute',
                 width: ' 326px',
                 left: '32px',
-                top: '407px',
+                top: '417px',
               }}
               type="number"
               value={rooms}
@@ -115,7 +125,7 @@ function CreateCommunity() {
                 position: 'absolute',
                 width: ' 326px',
                 left: '32px',
-                top: '478px',
+                top: '488px',
               }}
             >
               Upload Image
@@ -125,7 +135,7 @@ function CreateCommunity() {
                 position: 'absolute',
                 width: ' 326px',
                 left: '32px',
-                top: '494px',
+                top: '504px',
               }}
               className="file-input input-createCommunity"
               type="file"
