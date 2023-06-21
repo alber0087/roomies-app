@@ -38,3 +38,16 @@ export const getUserLogged = async () => {
     console.error('Cannot get user logged', err)
   }
 }
+
+export const updateUserService = async (id, name, lastName, resultSmoker, description, resultGender, resultBirthday) => {
+  await api.put(
+    `/users/profile/${id}`,
+    {firstName: name, lastName, smoker: resultSmoker, description, gender: resultGender, birth_date: resultBirthday },
+    {
+      headers: {
+        token: localStorage.getItem('token'),
+      },
+    }
+  )
+}
+
