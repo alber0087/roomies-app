@@ -10,9 +10,8 @@ export const addExpense = async (expense, price) => {
           token: localStorage.getItem('token'),
         },
       }
-    )
-    console.log(data)
-    console.log('hola')
+    )    
+    
   } catch (error) {
     console.error('Errado', error)
   }
@@ -20,12 +19,13 @@ export const addExpense = async (expense, price) => {
 
 export const getExpenses = async () => {
   try {
+    console.log("service get expenses")
     const { data } = await api.get('/expenses/profile/expenses', {
       headers: {
         token: localStorage.getItem('token'),
       },
-    })
-    return data
+    })    
+    return data.expenses
   } catch (error) {
     console.error('Errado', error)
   }

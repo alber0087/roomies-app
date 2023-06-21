@@ -1,3 +1,15 @@
+import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import { getUserLogged, getUsersByCommunity } from '../../services/user.service'
+import { getCommunityId } from '../../services/community.service'
+
+import {
+  deleteExpense,
+  expensePaid,
+  getExpenses,
+} from '../../services/expenses.service'
+
+import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import {
   Accordion,
   AccordionDetails,
@@ -11,17 +23,8 @@ import {
   Toolbar,
   Typography,
 } from '@mui/material'
-import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import './Expenses.css'
-import { Link } from 'react-router-dom'
-import {
-  deleteExpense,
-  expensePaid,
-  getExpenses,
-} from '../../services/expenses.service'
-import { useEffect, useState } from 'react'
-import { getUserLogged, getUsersByCommunity } from '../../services/user.service'
-import { getCommunityId } from '../../services/community.service'
+import PrimaryBtn from '../../components/PrimaryBtn/PrimaryBtn'
 
 function Expenses() {
   const [expenses, setExpenses] = useState([])
@@ -37,8 +40,8 @@ function Expenses() {
 
   const listExpenses = async () => {
     const res = await getExpenses()
-
-    setExpenses(res.expenses)
+    console.log(res)
+    setExpenses(res)
   }
 
   const deleteExpenseFunc = async (id) => {
@@ -61,7 +64,8 @@ function Expenses() {
 
   const getTotalUsersCommunity = async () => {
     const res = await getUsersByCommunity()
-    setTotalUsersCommunity(res.users.length)
+    console.log(res)
+    setTotalUsersCommunity(res.users.users.length)
   }
 
   useEffect(() => {
@@ -119,7 +123,8 @@ function Expenses() {
               .replace('.', ',')}{' '}
             €<br></br>
           </Typography>
-          {usersCommunity.map((i) => {
+          {usersCommunity.length > 0 && 
+          usersCommunity.map((i) => {
             if (i.id !== userLogged.id) {
               return (
                 <Typography key={i.id} variant="text">
@@ -137,7 +142,8 @@ function Expenses() {
     } else {
       return (
         <>
-          {usersCommunity.map((i) => {
+          
+          {usersCommunity.length > 0 && usersCommunity.map((i) => {
             if (i.id === userLogged.id) {
               return (
                 <Typography key={i.id}>
@@ -176,90 +182,66 @@ function Expenses() {
   }
 
   return (
-    <Box>
-      <AppBar
-        sx={{
-          position: 'absolute',
-          width: '282px',
-          height: '106px',
-          left: '53px',
-          top: '130px',
-          backgroundColor: 'black',
-          boxShadow: 'none',
-          transition: 'none',
-        }}
-      >
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            <AccountCircleIcon />
-          </IconButton>
-          <Typography sx={{ flexGrow: 1 }}>
-            <span className="bold-title">{community.name}</span>
-            <br />
-            {community.city}
-          </Typography>
-        </Toolbar>
-        <Typography sx={{ padding: '10px 0 0 10px' }}>
-          {lentOrOwe()}{' '}
-          <span className="total-lent">
-            {calculateTotal().toFixed(2).replace('.', ',')} €
-          </span>
-        </Typography>
-      </AppBar>
-      <div>
-        <div>
+    <div className="container">
+      <Box>
+        <div className="wrapper expenses-wrapper">
+          <div className='expenses-header'>
+            <Toolbar>
+              <IconButton
+                size="large"
+                edge="start"
+                color="inherit"
+                aria-label="menu"
+                sx={{ mr: 2 }}
+              >
+                <AccountCircleIcon />
+              </IconButton>
+              <Typography sx={{ flexGrow: 1 }}>
+                <span className="bold-title">{community.name}</span>
+                <br />
+                {community.city}
+              </Typography>
+            </Toolbar>
+            <div className='right right-expense'>
+              <Typography sx={{ padding: '10px 0 0 10px' }}>
+                {lentOrOwe()}{' '}
+                <span className="total-lent">
+                  {calculateTotal().toFixed(2).replace('.', ',')} €
+                </span>
+              </Typography> 
+            </div>
+          </div>
           {expenses?.length > 0 &&
             expenses.map((e) => (
               <Accordion key={e.id}>
                 <AccordionSummary>
-                  <Card sx={{ width: '400px' }}>
-                    <CardContent>
-                      <Typography variant="h5" component="div">
-                        {e.name}
-                      </Typography>
-                      <Typography variant="body">
-                        {calculateExpense(e).toFixed(2)} €
-                      </Typography>
-                      <Button
-                        variant="contained"
-                        onClick={() => deleteExpenseFunc(e.id)}
-                      >
-                        DELETE
-                      </Button>
-                      <Button
-                        variant="contained"
-                        onClick={() => expensePaidFunc(e.id)}
-                      >
-                        PAID
-                      </Button>
-                    </CardContent>
-                  </Card>
+                    <div className='card-content'>
+                      <div>{e.name}</div>
+                      <div className='price'>
+                        <div className={e.community_expense.status === 'Paid' ? 'paid' : ''}>{calculateExpense(e).toFixed(2)} €</div>
+                        {/*                         <Button
+                            variant="contained"
+                            onClick={() => deleteExpenseFunc(e.id)}
+                          >
+                            DELETE
+                          </Button> */}
+                        <Button
+                          onClick={() => expensePaidFunc(e.id)}
+                        >
+                          PAID
+                        </Button>
+                      </div>
+                    </div>
                 </AccordionSummary>
                 <AccordionDetails>{debtDivision(e)}</AccordionDetails>
               </Accordion>
             ))}
         </div>
-      </div>
-      <Button
-        variant="contained"
-        sx={{
-          position: 'absolute',
-          left: '22px',
-          top: '655px',
-          width: '322px',
-          height: '48px',
-          backgroundColor: 'var(--secondary-color)',
-        }}
-      >
-        <Link to="/expenses/addexpense">Add Expense</Link>
-      </Button>
-    </Box>
+      </Box>
+        <Link to="/expenses/addexpense">
+          <PrimaryBtn value="Add Expense" />
+        </Link>
+    </div>
   )
 }
 

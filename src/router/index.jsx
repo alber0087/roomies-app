@@ -10,7 +10,7 @@ import AddExpensePage from "../pages/AddExpensePage/AddExpensePage"
 import Tasks from '../pages/Tasks/Tasks'
 import CreateCommunity from "../pages/CreateCommunityPage/CreateCommunity"
 import InviteUser from "../pages/InviteUserPage/InviteUser"
-import ChatPage from "../pages/ChatPage/ChatPage"
+
 
 const checkLogged = () => {
   if (!localStorage.getItem('token')) return redirect('/login')
@@ -40,10 +40,10 @@ const router = createBrowserRouter([
         path: '/tasks',
         element: <Tasks />
       },
-      {
+    /*   {
         path: '/chat',
         element: <ChatPage />
-      }
+      } */
     ],
   },
   {
