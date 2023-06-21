@@ -1,4 +1,9 @@
-.wrapper {
+/* .wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+.addTask-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;

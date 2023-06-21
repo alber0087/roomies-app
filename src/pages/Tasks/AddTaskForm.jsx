@@ -35,7 +35,7 @@ const AddTaskForm = ({ onSubmit }) => {
   }
 
   return (
-    <div className="wrapper">
+    <div className="wrapper addTask-wrapper">
       <form onSubmit={handleSubmit} className="form-wrapper">
         <div className="form-group">
           <label>Task Name:</label>
