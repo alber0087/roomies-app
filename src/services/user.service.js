@@ -39,10 +39,10 @@ export const getUserLogged = async () => {
   }
 }
 
-export const updateUserService = async (id, name, lastName, resultSmoker, description, resultGender, resultBirthday) => {
+export const updateUserService = async (id, name, lastName, resultSmoker, description, resultGender, resultBirthday, image) => {
   await api.put(
     `/users/profile/${id}`,
-    {firstName: name, lastName, smoker: resultSmoker, description, gender: resultGender, birth_date: resultBirthday },
+    {firstName: name, lastName, smoker: resultSmoker, description, gender: resultGender, birth_date: resultBirthday, image },
     {
       headers: {
         token: localStorage.getItem('token'),

@@ -10,40 +10,25 @@ import { useEffect, useState } from 'react'
 import { updateUserService } from '../../../services/user.service'
 import ImageUploader from '../ImageImput/ImageImput'
 
-
-
-
-function EditProfile({ person, setProfile }) {
+function EditProfile({ person, setPerson, setProfile }) {
   const [name, setName] = useState('')
   const [lastName, setLastName] = useState('')
   const [smoker, setSmoker] = useState('')
   const [description, setDescription] = useState('')
   const [gender, setGender] = useState('')
   const [birthday, setBirthday] = useState('')
-  const [image, setImage] = useState(null)
+  const [image, setImage] = useState('')
   const id = person.id
-  
 
-
-
+  const handleDatosRecibidos = (datos) => {
+    setImage(datos)
+  }
+  console.log(image)
+  console.log(image)
 
   useEffect(() => {
-   
-  }, [])
-
-  const handleImageChange = (event) => {
-  const file = event.target.files[0]
-  const reader = new FileReader()
-
-  reader.onload = () => {
-    setImage(reader.result)
-  }
-
-  if (file) {
-    reader.readAsDataURL(file)
-  }
-}
-
+    handleDatosRecibidos()
+  }, [person])
 
   const changeComponent = () => {
     setProfile(false)
@@ -78,30 +63,31 @@ function EditProfile({ person, setProfile }) {
       resultSmoker,
       description,
       resultGender,
-      resultBirthday
+      resultBirthday,
+      image
     )
     changeComponent()
   }
 
-  const validateGender =  () => {
-     if (person &&  person.gender === null ) {
-    return 'Other'
-    } else if (gender === '' &&  person.gender !== null) {
-      return  person.gender
+  const validateGender = () => {
+    if (person && person.gender === null) {
+      return 'Other'
+    } else if (gender === '' && person.gender !== null) {
+      return person.gender
     } else {
       return gender
     }
   }
 
-    const validateSmoker = () => {
-      if (person && person.smoker === null) {
-        return 'No'
-      } else if (smoker === '' && person.smoker !== null) {
-        return person.smoker
-      } else {
-        return smoker
-      }
+  const validateSmoker = () => {
+    if (person && person.smoker === null) {
+      return 'No'
+    } else if (smoker === '' && person.smoker !== null) {
+      return person.smoker
+    } else {
+      return smoker
     }
+  }
 
   const validateBirthday = () => {
     if (person && person.birth_date === null) {
@@ -113,27 +99,34 @@ function EditProfile({ person, setProfile }) {
     }
   }
 
+  const validateImage = () => {
+    if (person.image === '') {
+      return ''
+    } else if (person.image.length > 0) {
+      return person.image
+    } else {
+      return image
+    }
+  }
 
-const resultBirthday = validateBirthday()
-const resultGender = validateGender()
-const resultSmoker = validateSmoker()
-
+  const resultBirthday = validateBirthday()
+  const resultGender = validateGender()
+  const resultSmoker = validateSmoker()
+  const resultImage = validateImage()
 
   return (
     <div className="container">
       <div className="wrapper">
-        <div className="image-profile">
-          <img width={100} src={image} alt="Profile" />
-        </div>
         <br />
         <div className="wrapper-form">
-          <ImageUploader/>
-          <TextField
-            style={{ width: '80%' }}
-            size="small"
-            type="file"
-            onChange={handleImageChange}
+          <ImageUploader
+            onDatosRecibidos={handleDatosRecibidos}
+            person={person}
+            setPerson={setPerson}
+            setImage={setImage}
+            resultImage={resultImage}
           />
+
           <TextField
             style={{ width: '80%' }}
             size="small"

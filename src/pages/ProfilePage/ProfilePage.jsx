@@ -7,19 +7,13 @@ function ProfilePage() {
   const [person, setPerson] = useState([])
   const [profile, setProfile] = useState(false)
 
-
-  function Profile()  {
-
+  function Profile() {
     return (
       <div className="container">
         <div className="wrapper">
-          <EditBtn onClick={changeComponent}  />
+          <EditBtn onClick={changeComponent} />
           <div className="image-profile">
-            <img
-              width={200}
-              src="https://i.ibb.co/WDbJdVG/persona.jpg"
-              alt="Imagen de perfil"
-            />
+            <img width={200} src={person.image} alt="Imagen de perfil" />
           </div>
           <div
             style={{
@@ -49,11 +43,9 @@ function ProfilePage() {
     )
   }
 
-
-
   const changeComponent = () => {
     setProfile(true)
-  }  
+  }
 
   const getPerson = async () => {
     const res = await getUserLogged()
@@ -67,7 +59,15 @@ function ProfilePage() {
 
   return (
     <>
-     {profile ? <EditProfile person={person}  setProfile={setProfile}/> : <Profile />}
+      {profile ? (
+        <EditProfile
+          person={person}
+          setPerson={setPerson}
+          setProfile={setProfile}
+        />
+      ) : (
+        <Profile />
+      )}
     </>
   )
 }
