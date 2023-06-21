@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { api } from './api'
 
 export const addExpense = async (expense, price) => {
@@ -11,7 +12,6 @@ export const addExpense = async (expense, price) => {
         },
       }
     )    
-    
   } catch (error) {
     console.error('Errado', error)
   }
@@ -19,7 +19,6 @@ export const addExpense = async (expense, price) => {
 
 export const getExpenses = async () => {
   try {
-    console.log("service get expenses")
     const { data } = await api.get('/expenses/profile/expenses', {
       headers: {
         token: localStorage.getItem('token'),
@@ -50,7 +49,6 @@ export const expensePaid = async (id) => {
         token: localStorage.getItem('token'),
       },
     })
-
   } catch (error) {
     console.error('Errado', error)
   }

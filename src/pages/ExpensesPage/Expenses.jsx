@@ -14,11 +14,8 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
-  AppBar,
   Box,
   Button,
-  Card,
-  CardContent,
   IconButton,
   Toolbar,
   Typography,
@@ -40,7 +37,6 @@ function Expenses() {
 
   const listExpenses = async () => {
     const res = await getExpenses()
-    console.log(res)
     setExpenses(res)
   }
 
@@ -64,7 +60,6 @@ function Expenses() {
 
   const getTotalUsersCommunity = async () => {
     const res = await getUsersByCommunity()
-    console.log(res)
     setTotalUsersCommunity(res.users.users.length)
   }
 
@@ -142,7 +137,6 @@ function Expenses() {
     } else {
       return (
         <>
-          
           {usersCommunity.length > 0 && usersCommunity.map((i) => {
             if (i.id === userLogged.id) {
               return (

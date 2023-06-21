@@ -41,4 +41,5 @@
 
 .paid {
     text-decoration: line-through;
+    color: var(--dark-gray-color);
 }

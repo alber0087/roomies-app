@@ -56,7 +56,7 @@ function Tasks() {
       {isTasksVisible && (
         <div className="wrapper tasks-wrapper">
           <div className="tasks-list">
-            {tasks.map((task) => (
+            {tasks.length > 0 && tasks.map((task) => (
               <TaskCard
                 key={task.id}
                 title={task.name}

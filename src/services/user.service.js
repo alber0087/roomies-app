@@ -20,7 +20,6 @@ export const getUsersByCommunity = async () => {
         token: localStorage.getItem('token'),
       },
     })
-    console.log(data)
     return data
   } catch (err) {
     console.error('Cannot get Community Users', err)
