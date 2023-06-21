@@ -2,16 +2,16 @@
 
 import { useState } from 'react'
 import './AddTaskForm.css'
-import PrimaryBtn from '../../components/PrimaryBtn/PrimaryBtn'
 import AddBtn from '../../components/AddBtn/AddBtn'
+import { addTaskService } from '../../services/task.service'
 
 const AddTaskForm = ({ onSubmit }) => {
-  const [taskName, setTaskName] = useState('')
+  const [name, setName] = useState('')
   const [description, setDescription] = useState('')
   const [date, setDate] = useState('')
 
   const handleTaskNameChange = (event) => {
-    setTaskName(event.target.value)
+    setName(event.target.value)
   }
 
   const handleDescriptionChange = (event) => {
@@ -24,17 +24,14 @@ const AddTaskForm = ({ onSubmit }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    const newTask = {
-      id: Date.now(), // Genera un ID único para la tarea
-      name: taskName,
-      description: description,
-      date: date,
-      completed: false,
-    }
-    onSubmit(newTask)
-    setTaskName('')
-    setDescription('')
-    setDate('')
+    onSubmit(addTask())
+    setName(name)
+    setDescription(description)
+    setDate(date)
+  }
+
+  const addTask = async () => {
+    await addTaskService(name, description, date)
   }
 
   return (
@@ -42,7 +39,7 @@ const AddTaskForm = ({ onSubmit }) => {
       <form onSubmit={handleSubmit} className="form-wrapper">
         <div className="form-group">
           <label>Task Name:</label>
-          <input type="text" value={taskName} onChange={handleTaskNameChange} />
+          <input type="text" value={name} onChange={handleTaskNameChange} />
         </div>
         <div className="form-group">
           <label>

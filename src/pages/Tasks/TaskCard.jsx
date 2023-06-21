@@ -25,13 +25,13 @@ function TaskCard({ task, title, onTaskStatusChange, onTaskDeletion }) {
         <div className="task-main">
           <CheckBox
             onChange={handleCheckboxChange}
-            defaultChecked={task.completed}
+            defaultChecked={task.status === 'Pending'}
           />
           <div
             className={`${isExpanded ? 'expanded' : ''}`}
             onClick={handleCardClick}
           >
-            <span className={task.completed ? 'done' : 'undone'}>{title}</span>
+            <span className={task.status === 'Completed' ? 'done' : 'undone'}>{title}</span>
           </div>
           <DeleteBtn onClick={handleDeleteButtonClick} />
         </div>

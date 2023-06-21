@@ -4,7 +4,7 @@ import TaskCard from './TaskCard'
 import AddTaskForm from './AddTaskForm'
 import './Tasks.css'
 
-import { getTasks } from '../../services/task.service'
+import { deleteTaskService, getTasks, updateTaskStatusService } from '../../services/task.service'
 
 function Tasks() {
   const [tasks, setTasks] = useState([])
@@ -16,16 +16,23 @@ function Tasks() {
     setTasks(res)
   }
 
+  const handleTaskDeletion = (taskId) => {
+    deleteTaskService(taskId)
+    const updatedList = tasks.filter((task) => task.id !== taskId)
+    setTasks(updatedList)
+  }
+
   useEffect(() => {
     listTasks()
   }, [])
 
   const handleTaskStatusChange = (taskId) => {
+    updateTaskStatusService(taskId)
     const updatedList = tasks.map((task) => {
       if (task.id === taskId) {
         return {
           ...task,
-          completed: !task.completed,
+          status: 'Completed',
         }
       }
       return task
@@ -33,19 +40,13 @@ function Tasks() {
     setTasks([...updatedList])
   }
 
-  const handleTaskDeletion = (taskId) => {
-    const updatedList = tasks.filter((task) => task.id !== taskId)
-    setTasks(updatedList)
-  }
-
   const handleAddTaskClick = () => {
     setIsAddFormVisible(!isAddFormVisible)
     setIsTasksVisible(!isTasksVisible)
   }
 
-  const handleAddTaskSubmit = (newTask) => {
-    console.log(newTask)
-    setTasks([...tasks, newTask])
+  const handleAddTaskSubmit = (addTask) => {
+    setTasks([...tasks, addTask])
     setIsAddFormVisible(false)
     setIsTasksVisible(!isTasksVisible)
   }
