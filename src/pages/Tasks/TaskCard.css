@@ -7,7 +7,6 @@ body {
   width: calc(100% - 24px);
   padding: 12px;
   border-radius: 12px;
-  display: flex;
   margin-bottom: 12px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
 }
@@ -16,6 +15,25 @@ body {
   background-color: var(--white-color);
 }
 
+.task-main {
+  display: flex;
+}
+
 .done {
   text-decoration: line-through;
+}
+
+.extend-info {
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 12px;
+  font-size: 0.8rem;
+  padding: 12px 0px 0px 24px;
+}
+
+.right {
+  margin-top: 16px;
+  text-align: right;
 }

@@ -14,13 +14,12 @@ function Tasks() {
   const listTasks = async () => {
     const res = await getTasks()
     setTasks(res)
-    
   }
 
   useEffect(() => {
     listTasks()
   }, [])
-console.log(tasks)
+
   const handleTaskStatusChange = (taskId) => {
     const updatedList = tasks.map((task) => {
       if (task.id === taskId) {
@@ -45,8 +44,10 @@ console.log(tasks)
   }
 
   const handleAddTaskSubmit = (newTask) => {
+    console.log(newTask)
     setTasks([...tasks, newTask])
     setIsAddFormVisible(false)
+    setIsTasksVisible(!isTasksVisible)
   }
 
   return (
@@ -66,8 +67,8 @@ console.log(tasks)
           </div>
         </div>
       )}
-      {isAddFormVisible && <AddTaskForm onSubmit={handleAddTaskSubmit} />}
-      <PrimaryBtn value="Add Task" callToAction={handleAddTaskClick} />
+      {isAddFormVisible && <AddTaskForm onSubmit={handleAddTaskSubmit}/>}
+      {!isAddFormVisible && <PrimaryBtn value="Add Task" callToAction={handleAddTaskClick} />}
     </div>
   )
 }

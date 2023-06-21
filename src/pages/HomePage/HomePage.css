@@ -11,5 +11,6 @@
 @media (max-width: 767px) {
   .container {
     overflow: hidden;
+    min-width: 400px;
   }
 }
