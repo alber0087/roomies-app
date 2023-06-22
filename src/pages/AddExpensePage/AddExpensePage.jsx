@@ -7,6 +7,7 @@ import EuroIcon from '@mui/icons-material/Euro'
 import PrimaryBtn from '../../components/PrimaryBtn/PrimaryBtn'
 import './AddExpensePage.css'
 import { Link } from 'react-router-dom'
+import PrevBtn from '../Tasks/PrevBtn/PrevBtn'
 
 function AddExpensePage() {
   const [expense, setExpense] = useState('')
@@ -28,6 +29,9 @@ function AddExpensePage() {
 
   return (
     <div className="container">
+    <Link to='/expenses'>
+      <PrevBtn />
+    </Link>
       <div className="addExpense-wrapper">
         <div className="expense-title">
           <TextField label="Introduce a description" onChange={handleExpense} />
