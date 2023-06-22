@@ -6,8 +6,14 @@ import EditProfile from './EditProfile/EditProfile'
 function ProfilePage() {
   const [person, setPerson] = useState([])
   const [profile, setProfile] = useState(false)
+  const [image, setImage] = useState('')
 
   function Profile() {
+ 
+
+
+
+
     return (
       <div className="container">
         <div className="wrapper">
@@ -52,21 +58,32 @@ function ProfilePage() {
     setPerson(res)
   }
 
+  const sendData = (datos) => {
+    setImage(datos)
+  }
+
+  useEffect(() => {
+    sendData()
+  }, [person])
+
   useEffect(() => {
     getPerson()
   }, [profile])
+
   console.log(person)
+  console.log(image)
 
   return (
     <>
       {profile ? (
         <EditProfile
+          sendData={sendData}
           person={person}
           setPerson={setPerson}
           setProfile={setProfile}
         />
       ) : (
-        <Profile />
+        <Profile image={image}/>
       )}
     </>
   )

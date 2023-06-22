@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import {
   FormControl,
   InputLabel,
@@ -10,7 +11,7 @@ import { useEffect, useState } from 'react'
 import { updateUserService } from '../../../services/user.service'
 import ImageUploader from '../ImageImput/ImageImput'
 
-function EditProfile({ person, setPerson, setProfile }) {
+function EditProfile({ person, setPerson, setProfile, sendData }) {
   const [name, setName] = useState('')
   const [lastName, setLastName] = useState('')
   const [smoker, setSmoker] = useState('')
@@ -23,8 +24,6 @@ function EditProfile({ person, setPerson, setProfile }) {
   const handleDatosRecibidos = (datos) => {
     setImage(datos)
   }
-  console.log(image)
-  console.log(image)
 
   useEffect(() => {
     handleDatosRecibidos()
@@ -55,6 +54,18 @@ function EditProfile({ person, setPerson, setProfile }) {
     setDescription(e.target.value)
   }
 
+  const validateImage = () => {
+    if (image === '' && person.image === '') {
+      return ''
+    } else if (image === '' && person.image.length > 0) {
+      return person.image
+    } else {
+      return image
+    }
+  }
+
+  const resultImage = validateImage()
+
   const updateProfile = async () => {
     await updateUserService(
       id,
@@ -64,7 +75,7 @@ function EditProfile({ person, setPerson, setProfile }) {
       description,
       resultGender,
       resultBirthday,
-      image
+      resultImage
     )
     changeComponent()
   }
@@ -99,20 +110,11 @@ function EditProfile({ person, setPerson, setProfile }) {
     }
   }
 
-  const validateImage = () => {
-    if (person.image === '') {
-      return ''
-    } else if (person.image.length > 0) {
-      return person.image
-    } else {
-      return image
-    }
-  }
-
   const resultBirthday = validateBirthday()
   const resultGender = validateGender()
   const resultSmoker = validateSmoker()
-  const resultImage = validateImage()
+
+  sendData(resultImage)
 
   return (
     <div className="container">

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import './EditBtn.css'
 
 function EditBtn({onClick}) {
