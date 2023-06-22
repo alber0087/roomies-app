@@ -11,6 +11,7 @@ import Tasks from '../pages/Tasks/Tasks'
 import CreateCommunity from "../pages/CreateCommunityPage/CreateCommunity"
 import InviteUser from "../pages/InviteUserPage/InviteUser"
 import ProfilePage from "../pages/ProfilePage/ProfilePage"
+import ChatPage from "../pages/ChatPage/ChatPage"
 
 
 const checkLogged = () => {
@@ -45,10 +46,10 @@ const router = createBrowserRouter([
         path: '/profile',
         element: <ProfilePage />
       },
-    /*   {
+      {
         path: '/chat',
         element: <ChatPage />
-      } */
+      }
     ],
   },
   {
