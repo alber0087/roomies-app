@@ -41,7 +41,7 @@ function ImageUploader({ resultImage, onDatosRecibidos }) {
       <TextField
         labelid="image-label"
         type="file"
-        style={{ width: '80%' }}
+        style={{ width: '80%', background: 'white', borderRadius: '4px' }}
         size="small"
         onChange={handleImageUpload}
       />

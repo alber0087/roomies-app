@@ -121,18 +121,18 @@ function EditProfile({ person, setPerson, setProfile, sendData }) {
   return (
     <div className="container">
       <div className="wrapper wrapper-profile">
-      <PrevBtn onClick={changeComponent}/>
+        <PrevBtn onClick={changeComponent} />
         <div className="wrapper-form">
           <ImageUploader
+            style={{ width: '80%', background: 'white', borderRadius: '4px' }}
             onDatosRecibidos={handleDatosRecibidos}
             person={person}
             setPerson={setPerson}
             setImage={setImage}
             resultImage={resultImage}
           />
-
           <TextField
-            style={{ width: '80%' }}
+            style={{ width: '80%', background: 'white', borderRadius: '4px' }}
             size="small"
             label="First Name"
             type="text"
@@ -140,7 +140,7 @@ function EditProfile({ person, setPerson, setProfile, sendData }) {
             onChange={handleName}
           />
           <TextField
-            style={{ width: '80%' }}
+            style={{ width: '80%', background: 'white', borderRadius: '4px' }}
             size="small"
             label="Last Name"
             type="text"
@@ -148,9 +148,8 @@ function EditProfile({ person, setPerson, setProfile, sendData }) {
             onChange={handleLastName}
           />
           <TextField
-            style={{ width: '80%' }}
+            style={{ width: '80%', background: 'white', borderRadius: '4px' }}
             size="small"
-            label="Birthdate"
             type="date"
             value={resultBirthday}
             InputLabelProps={{
@@ -158,8 +157,10 @@ function EditProfile({ person, setPerson, setProfile, sendData }) {
             }}
             onChange={handleBirthday}
           />
-          <FormControl style={{ width: '80%' }}>
-            <InputLabel id="gender-label">¿Gender?</InputLabel>
+          <FormControl
+            style={{ width: '80%', background: 'white', borderRadius: '4px' }}
+          >
+            <InputLabel id="gender-label">Gender</InputLabel>
             <Select
               size="small"
               className="select"
@@ -173,8 +174,10 @@ function EditProfile({ person, setPerson, setProfile, sendData }) {
               <MenuItem value="Other">Other</MenuItem>
             </Select>
           </FormControl>
-          <FormControl style={{ width: '80%' }}>
-            <InputLabel id="smoker-label">¿Es fumador?</InputLabel>
+          <FormControl
+            style={{ width: '80%', background: 'white', borderRadius: '4px' }}
+          >
+            <InputLabel id="smoker-label">Smoker</InputLabel>
             <Select
               labelId="smoker-label"
               className="select"
@@ -188,15 +191,15 @@ function EditProfile({ person, setPerson, setProfile, sendData }) {
             </Select>
           </FormControl>
           <TextField
-            style={{ width: '80%' }}
+            style={{ width: '80%', background: 'white', borderRadius: '4px' }}
             size="small"
-            label="Descripción"
+            label="Description"
             multiline
             rows={4}
             value={description}
             onChange={handleDescription}
           />
-          <br/>
+          <br />
           <PrimaryBtn callToAction={updateProfile} value={'Update Profile'} />
         </div>
       </div>

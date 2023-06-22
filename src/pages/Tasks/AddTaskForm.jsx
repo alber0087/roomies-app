@@ -36,29 +36,28 @@ const AddTaskForm = ({ onSubmit }) => {
 
   return (
     <div className="wrapper addTask-wrapper">
-        <form onSubmit={handleSubmit} className="form-wrapper">
-          <div className="form-group">
-            <label>Task Name:</label>
-            <input type="text" value={name} onChange={handleTaskNameChange} />
-          </div>
-          <div className="form-group">
-            <label>
-              Description:
-            </label>
-              <input
-                type="text"
-                value={description}
-                onChange={handleDescriptionChange}
-              />
-          </div>
-          <div className="form-group">
-            <label>
-            Date:
-          </label>
-            <input type="date" value={date} onChange={handleDateChange} />
-          </div>
-          <AddBtn value='+'/>
-        </form>
+      <form onSubmit={handleSubmit} className="form-wrapper">
+        <div className="form-group">
+          <label>Task Name:</label>
+          <input type="text" value={name} onChange={handleTaskNameChange} />
+        </div>
+        <div className="form-group">
+          <label>Date:</label>
+          <input type="date" value={date} onChange={handleDateChange} />
+        </div>
+        <div className="form-group">
+          <label>Description:</label>
+          <textarea
+            type="text"
+            rows={6}
+            value={description}
+            onChange={handleDescriptionChange}
+          />
+        </div>
+        <div className="right">
+          <AddBtn value="+" />
+        </div>
+      </form>
     </div>
   )
 }
