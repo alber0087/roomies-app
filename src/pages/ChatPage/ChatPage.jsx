@@ -1,4 +1,4 @@
-/* import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { getUserLogged } from '../../services/user.service'
 import './ChatPage.css'
 import { socket } from '../../socket'
@@ -54,4 +54,4 @@ function ChatPage() {
   )
 }
 
-export default ChatPage */
+export default ChatPage
