@@ -6,6 +6,7 @@ import { addExpense } from '../../services/expenses.service'
 import EuroIcon from '@mui/icons-material/Euro'
 import PrimaryBtn from '../../components/PrimaryBtn/PrimaryBtn'
 import './AddExpensePage.css'
+import { Link } from 'react-router-dom'
 
 function AddExpensePage() {
   const [expense, setExpense] = useState('')
@@ -36,7 +37,9 @@ function AddExpensePage() {
           <EuroIcon />
         </div>
       </div>
-      <PrimaryBtn value="Add Expense" callToAction={addExpenseFunc} />
+      <Link to='/expenses'>
+        <PrimaryBtn value="Add Expense" callToAction={addExpenseFunc} />
+      </Link>
     </div>
   )
 }
