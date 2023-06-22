@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState, useEffect } from 'react'
 import { Snackbar } from '@mui/material'
 
@@ -17,14 +18,12 @@ function HomePage() {
 
   const generateInvitationLink = () => {
     const baseUrl = 'https://roomiesapi-production.up.railway.app/api/communities/profile'
-    const invitationLink = `${baseUrl}/${community.id}`
+    const shortBaseUrl = 'https://goo.su/fXzfxLL'
+    const invitationLink = `${shortBaseUrl}/${community.id}`
 
     navigator.clipboard.writeText(invitationLink)
 
     setOpen(true)
-
-    console.log(community.id)
-    console.log(invitationLink)
   }
 
   const getCommunityInfo = async () => {

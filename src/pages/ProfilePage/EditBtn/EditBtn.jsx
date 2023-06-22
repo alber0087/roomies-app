@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import './EditBtn.css'
+import '../../../components/BackBtn/BackBtn.css'
 
 function EditBtn({onClick}) {
   return (

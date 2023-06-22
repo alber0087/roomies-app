@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react'
 import { getUserLogged } from '../../services/user.service'
 
+import Spinner from '../../components/Spinner/Spinner'
 
 import './Card.css'
 
@@ -79,14 +80,16 @@ useEffect(() => {
         <div className="img-card">
           <img src={community.image} />
         </div>
-        {showCard && <CommunityInfo />}
+        {showCard ? <CommunityInfo /> : <Spinner />}
         <CommunityMembers />
-        {showCard && (
+        {showCard ? (
           <div className="map-container">
             <img
               src={`https://maps.googleapis.com/maps/api/staticmap?center=${community.address},${cityNameTrimmed}&format=gif&zoom=16&size=300x200&key=${API_KEY}`}
             />
           </div>
+        ) : (
+          <Spinner />
         )}
       </div>
     </div>

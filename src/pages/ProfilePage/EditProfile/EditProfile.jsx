@@ -9,8 +9,9 @@ import {
 import './EditProfile.css'
 import { useEffect, useState } from 'react'
 import { updateUserService } from '../../../services/user.service'
-import ImageUploader from '../ImageImput/ImageImput'
+import ImageUploader from '../ImageInput/ImageInput'
 import PrimaryBtn from '../../../components/PrimaryBtn/PrimaryBtn'
+import PrevBtn from './PrevBtn/PrevBtn'
 
 function EditProfile({ person, setPerson, setProfile, sendData }) {
   const [name, setName] = useState('')
@@ -119,8 +120,8 @@ function EditProfile({ person, setPerson, setProfile, sendData }) {
 
   return (
     <div className="container">
-      <div className="wrapper">
-        <br />
+      <div className="wrapper wrapper-profile">
+      <PrevBtn onClick={changeComponent}/>
         <div className="wrapper-form">
           <ImageUploader
             onDatosRecibidos={handleDatosRecibidos}

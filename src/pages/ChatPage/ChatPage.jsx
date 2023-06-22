@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { getUserLogged } from '../../services/user.service'
-import './ChatPage.css'
 import { socket } from '../../socket'
+import './ChatPage.css'
 
 function ChatPage() {
   const [isConnected, setIsConnected] = useState(false)
@@ -30,26 +30,32 @@ function ChatPage() {
 
   const sendMessage = () => {
     socket.emit('chat_message', {
-      user: userLogged.firstName.toUpperCase(),
+      user: userLogged.firstName,
       message: newMessage,
     })
   }
 
   return (
-    <div className='container'>
-      <h2>{isConnected ? 'CONECTADO' : 'NO CONECTADO'}</h2>
-      <ul className='chat-box'>
-        {messages.map((m, idx) => (
-           <li className='message' key={idx}>
-            {m.user}: {m.message}
-          </li>
-        ))}
-      </ul>
-      <input
-        type="text"
-        onChange={(e) => setNewMessage(e.target.value)}
-      ></input>
-      <button onClick={sendMessage}>Send</button>
+    <div className="container">
+      {/*       <h2>{isConnected ? 'CONECTADO' : 'NO CONECTADO'}</h2> */}
+      <div className="wrapper">
+        <div className="chat-box">
+          {messages.map((m, idx) => (
+            <div className="message" key={idx}>
+              <div className="user-wrapper">
+                <span className="user">{m.user}:</span>
+              </div>
+              <span>{m.message}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="chat-form">
+        <input type="text" onChange={(e) => setNewMessage(e.target.value)} />
+        <button onClick={sendMessage}>
+          <span className="material-symbols-outlined">send</span>
+        </button>
+      </div>
     </div>
   )
 }
