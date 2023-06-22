@@ -32,6 +32,10 @@ a:active {
   color: var(--primary-color)
 }
 
+.active {
+  color: var(--primary-color);
+}
+
 @media (max-width: 767px) {
   .mobile-nav {
     width: 100%;
