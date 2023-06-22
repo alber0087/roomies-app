@@ -23,18 +23,9 @@ function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [isPassVisible, setIsPassVisible] = useState(false)
-  const [user, setUser] = useState([])
 
- const getUser = async () => {
-  if (localStorage.getItem('token')){
-    const res = await getUserLogged()
-    setUser(res)
-  }
- }
 
- useEffect(() => {
-getUser()
- },[])
+
 
 
   const navigate = useNavigate()
@@ -53,10 +44,16 @@ getUser()
  
   const logIn = async () => {
     await login(email, password)
+
+  
+    const user = await getUserLogged()
     if (!localStorage.getItem('token')) return  alert('Error: user or password wrong')
-    else if (user.communityId === null) return navigate('/invite')
-    else return navigate('/dashboard')
+    else if (user.communityId === null ) navigate('/invite')
+    else navigate('/dashboard')
   }
+
+  
+
 
   return (
     <>

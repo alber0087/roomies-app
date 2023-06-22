@@ -70,8 +70,6 @@ function ProfilePage() {
     getPerson()
   }, [profile])
 
-  console.log(person)
-  console.log(image)
 
   return (
     <>

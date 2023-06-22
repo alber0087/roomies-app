@@ -21,7 +21,6 @@ function CreateCommunity() {
     setImage(data)
   }
 
-  console.log(image)
 
   const handleCitySelection = (city) => {
     setSelectedCity(city)
