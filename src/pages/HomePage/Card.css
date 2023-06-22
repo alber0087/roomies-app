@@ -6,7 +6,7 @@
   height: 60vh;
   border-radius: 50px;
   background-color: var(--white-color);
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
 }
 
 .card-header {
@@ -103,6 +103,7 @@
 @media (max-width: 767px) {
   .wrapper {
     height: 50vh;
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
   }
 
   .card-header {

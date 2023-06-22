@@ -1,13 +1,14 @@
 .addExpense-wrapper {
     width: 360px;
-    height: 360px;
+    height: 48vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    margin-top: 178px;
+    background-color: var(--white-color);
+    border-radius: 25px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
 }
-
 
 .expense-title {
     display: flex;

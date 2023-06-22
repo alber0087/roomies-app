@@ -3,46 +3,55 @@ import './ProfilePage.css'
 import { useEffect, useState } from 'react'
 import EditBtn from './EditBtn/EditBtn'
 import EditProfile from './EditProfile/EditProfile'
+import Spinner from '../../components/Spinner/Spinner'
+
 function ProfilePage() {
   const [person, setPerson] = useState([])
   const [profile, setProfile] = useState(false)
   const [image, setImage] = useState('')
 
   function Profile() {
- 
-
-
-
-
     return (
       <div className="container">
-        <div className="wrapper">
+        <div className="wrapper wrapper-profile">
           <EditBtn onClick={changeComponent} />
-          <div className="image-profile">
-            <img width={200} height={200} src={person.image} alt="Imagen de perfil" />
+          {person.image ? (
+            <div className="image-profile">
+              <img
+                width={160}
+                height={160}
+                src={person.image}
+                alt="Imagen de perfil"
+              />
+            </div>
+          ) : (
+            <Spinner />
+          )}
+          <div className="user-name">{person.firstName}</div>
+          <div className="data-profile">
+            <div className="space">
+              <span className="strong">Birthday: </span>
+              <div>
+                {person.birth_date === null ? 'Empty' : person.birth_date}
+              </div>
+            </div>
+            <div className='space'>
+              <span className="strong">Gender: </span>
+              <div>
+                {person.gender === null ? 'Empty' : person.gender}
+              </div>
+            </div>
+            <div className='space'>
+              <span className="strong">Smoker: </span>
+              <div>
+                {person.smoker === null ? 'Empty' : person.smoker}
+              </div>
+            </div>
           </div>
-          <div
-            style={{
-              textAlign: 'center',
-              fontSize: '24px',
-              fontWeight: 'bold',
-            }}
-          >
-            {person.firstName}
-          </div>
-          <br />
-          <ul className="data-profile">
-            <li>
-              Birthday:{' '}
-              {person.birth_date === null ? 'Empty' : person.birth_date}
-            </li>
-            <li>Gender: {person.gender === null ? 'Empty' : person.gender}</li>
-            <li>Smoker: {person.smoker === null ? 'Empty' : person.smoker}</li>
-          </ul>
 
           <div className="description">
-            <strong>Description :</strong> <br />
-            {person.description}
+            <span className="strong">Description :</span>
+            <div className="description">{person.description}</div>
           </div>
         </div>
       </div>
@@ -81,7 +90,7 @@ function ProfilePage() {
           setProfile={setProfile}
         />
       ) : (
-        <Profile image={image}/>
+        <Profile image={image} />
       )}
     </>
   )

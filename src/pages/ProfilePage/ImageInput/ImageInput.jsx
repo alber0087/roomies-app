@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import { Image } from 'cloudinary-react'
 import axios from 'axios'
-import { InputLabel, TextField } from '@mui/material'
+import { TextField } from '@mui/material'
 
 function ImageUploader({ resultImage, onDatosRecibidos }) {
   const [imageUrl, setImageUrl] = useState('')
@@ -34,15 +34,14 @@ function ImageUploader({ resultImage, onDatosRecibidos }) {
   return (
     <>
       <Image
-        style={{ width: '200px' }}
+        style={{ width: '140px', borderRadius: '50%', marginTop: '24px' }}
         cloudName="ayoze"
         publicId={resultImage}
       />
-      <InputLabel id="image-label">Update your image</InputLabel>
       <TextField
         labelid="image-label"
         type="file"
-        style={{ width: '80%' }}
+        style={{ width: '80%', background: 'white', borderRadius: '4px' }}
         size="small"
         onChange={handleImageUpload}
       />

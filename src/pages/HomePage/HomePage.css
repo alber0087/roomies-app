@@ -1,7 +1,7 @@
 .container {
   background-color: var(--light-gray-color);
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - 88px);
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -9,8 +9,5 @@
 }
 
 @media (max-width: 767px) {
-  .container {
-    overflow: hidden;
-    min-width: 400px;
-  }
+
 }

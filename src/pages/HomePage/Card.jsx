@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react'
 import { getUserLogged } from '../../services/user.service'
 
+import Spinner from '../../components/Spinner/Spinner'
 
 import './Card.css'
 
@@ -57,7 +58,6 @@ useEffect(() => {
           )
         })}
       </div>
-
     )
   }
 
