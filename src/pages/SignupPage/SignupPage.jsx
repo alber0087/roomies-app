@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import Header from '../../components/Header/Header'
 
@@ -17,6 +17,7 @@ import {
 import './SignupPage.css'
 
 import { signup } from '../../services/auth.service'
+import { getUsers } from '../../services/user.service'
 
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
 const passRegex = /^(?=.*\d)(.{5,})\1$/
@@ -30,6 +31,18 @@ function SignupPage() {
   const [valid, setValid] = useState(false)
   const [validPassword, setValidPassword] = useState(false)
   const [validRepeatPassword, setValidRepeatPassword] = useState(false)
+  const [user, setUser] = useState([])
+
+  const getUsersEmail = async () => {
+    if (localStorage.getItem('token')) {
+      const res = await getUsers()
+      setUser(res)
+    }
+  }
+
+  useEffect(() => {
+    getUsersEmail()
+  }, [])
 
   const navigate = useNavigate()
 
@@ -70,7 +83,6 @@ function SignupPage() {
     if (!emailRegex.test(email)) {
       setValid(false)
     } else {
-      //setCheckBox(e.target.checked)
       setValid(true)
     }
   }
@@ -80,12 +92,10 @@ function SignupPage() {
     if (
       valid !== true ||
       validPassword !== true ||
-      /*  checkBox !== true || */
       validRepeatPassword !== true
     ) {
       return alert('Verify the fields')
     } else {
-      console.log('entra')
       return alert('your connect')
     }
   }
@@ -95,6 +105,12 @@ function SignupPage() {
   }
 
   const signUp = async () => {
+    user.map((u) => {
+      if (email === u.email) {
+        alert('This email is alredy used')
+      }
+    })
+
     if (valid !== true) {
       alert('verify your email')
     } else if (validPassword !== true) {
@@ -105,10 +121,6 @@ function SignupPage() {
       else navigate('/invite')
     }
   }
-
-  console.log(name)
-  console.log(email)
-  console.log(password)
 
   return (
     <>
