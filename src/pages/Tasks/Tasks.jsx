@@ -6,6 +6,7 @@ import PrevBtn from './PrevBtn/PrevBtn'
 import './Tasks.css'
 
 import { deleteTaskService, getTasks, updateTaskStatusService } from '../../services/task.service'
+import Spinner from '../../components/Spinner/Spinner'
 
 function Tasks() {
   const [tasks, setTasks] = useState([])
@@ -25,7 +26,7 @@ function Tasks() {
 
   useEffect(() => {
     listTasks()
-  }, [])
+  }, [tasks])
 
   const handleTaskStatusChange = (taskId) => {
     updateTaskStatusService(taskId)
@@ -62,25 +63,31 @@ function Tasks() {
       {isTasksVisible && (
         <div className="wrapper tasks-wrapper">
           <div className="tasks-list">
-            {tasks.length > 0 && tasks.map((task) => (
-              <TaskCard
-                key={task.id}
-                title={task.name}
-                task={task}
-                onTaskStatusChange={handleTaskStatusChange}
-                onTaskDeletion={handleTaskDeletion}
-              />
-            ))}
+            {tasks.length > 0 ? (
+              tasks.map((task) => (
+                <TaskCard
+                  key={task.id}
+                  title={task.name}
+                  task={task}
+                  onTaskStatusChange={handleTaskStatusChange}
+                  onTaskDeletion={handleTaskDeletion}
+                />
+              ))
+            ) : (
+              <Spinner />
+            )}
           </div>
         </div>
       )}
       {isAddFormVisible && (
         <>
-          <PrevBtn onClick={handleGoBack}/>
-          <AddTaskForm onSubmit={handleAddTaskSubmit}/>
+          <PrevBtn onClick={handleGoBack} />
+          <AddTaskForm onSubmit={handleAddTaskSubmit} />
         </>
       )}
-      {!isAddFormVisible && <PrimaryBtn value="Add Task" callToAction={handleAddTaskClick} />}
+      {!isAddFormVisible && (
+        <PrimaryBtn value="Add Task" callToAction={handleAddTaskClick} />
+      )}
     </div>
   )
 }
