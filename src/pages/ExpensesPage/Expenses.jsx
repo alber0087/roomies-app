@@ -119,8 +119,8 @@ function Expenses() {
               .replace('.', ',')}{' '}
             €<br></br>
           </Typography>
-          {usersCommunity.length > 0 && 
-          usersCommunity.map((i) => {
+          {usersCommunity.users.length > 0 && 
+          usersCommunity.users.map((i) => {
             if (i.id !== userLogged.id) {
               return (
                 <Typography key={i.id} variant="text">
@@ -138,7 +138,7 @@ function Expenses() {
     } else {
       return (
         <>
-          {usersCommunity.length > 0 && usersCommunity.map((i) => {
+          {usersCommunity.users.length > 0 && usersCommunity.users.map((i) => {
             if (i.id === userLogged.id) {
               return (
                 <Typography key={i.id}>
