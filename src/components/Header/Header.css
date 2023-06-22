@@ -12,12 +12,6 @@
 }
 
 @media (max-width: 767px) {
-  body {
-    width: 390px;
-    height: 844px;
-    overflow-x: hidden;
-  }
-
   .logo img {
     width: 360px;
     position: absolute;

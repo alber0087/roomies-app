@@ -8,7 +8,6 @@ function PrimaryBtn({ style, value, callToAction }) {
         style={{ style }}
         className="primary-btn"
         onClick={callToAction}
-    
       >
         {value}
       </button>

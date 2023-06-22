@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import PrimaryBtn from '../../components/PrimaryBtn/PrimaryBtn'
 import TaskCard from './TaskCard'
 import AddTaskForm from './AddTaskForm'
+import PrevBtn from './PrevBtn/PrevBtn'
 import './Tasks.css'
 
 import { deleteTaskService, getTasks, updateTaskStatusService } from '../../services/task.service'
@@ -51,6 +52,11 @@ function Tasks() {
     setIsTasksVisible(!isTasksVisible)
   }
 
+  const handleGoBack = () => {
+    setIsAddFormVisible(false)
+    setIsTasksVisible(!isTasksVisible)
+  }
+
   return (
     <div className="container">
       {isTasksVisible && (
@@ -68,7 +74,12 @@ function Tasks() {
           </div>
         </div>
       )}
-      {isAddFormVisible && <AddTaskForm onSubmit={handleAddTaskSubmit}/>}
+      {isAddFormVisible && (
+        <>
+          <PrevBtn onClick={handleGoBack}/>
+          <AddTaskForm onSubmit={handleAddTaskSubmit}/>
+        </>
+      )}
       {!isAddFormVisible && <PrimaryBtn value="Add Task" callToAction={handleAddTaskClick} />}
     </div>
   )
