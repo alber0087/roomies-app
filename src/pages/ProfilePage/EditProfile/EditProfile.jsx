@@ -57,7 +57,7 @@ function EditProfile({ person, setPerson, setProfile, sendData }) {
   const validateImage = () => {
     if (image === '' && person.image === '') {
       return ''
-    } else if (image === '' && person.image.length > 0) {
+    } else if ((image === '' && person.image !== '')) {
       return person.image
     } else {
       return image
@@ -102,7 +102,7 @@ function EditProfile({ person, setPerson, setProfile, sendData }) {
 
   const validateBirthday = () => {
     if (person && person.birth_date === null) {
-      return 'Empty'
+      return null
     } else if (birthday === '' && person.birth_date !== null) {
       return person.birth_date
     } else {

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Header from '../../components/Header/Header'
 
@@ -17,11 +17,25 @@ import {
 import './Login.css'
 
 import { login } from '../../services/auth.service'
+import { getUserLogged } from '../../services/user.service'
 
 function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [isPassVisible, setIsPassVisible] = useState(false)
+  const [user, setUser] = useState([])
+
+ const getUser = async () => {
+  if (localStorage.getItem('token')){
+    const res = await getUserLogged()
+    setUser(res)
+  }
+ }
+
+ useEffect(() => {
+getUser()
+ },[])
+
 
   const navigate = useNavigate()
 
@@ -36,11 +50,12 @@ function Login() {
   const handlePassword = (value) => {
     setPassword(value.target.value)
   }
-
+ 
   const logIn = async () => {
     await login(email, password)
-    if (!localStorage.getItem('token')) alert('Error: user or password wrong')
-    else navigate('/invite')
+    if (!localStorage.getItem('token')) return  alert('Error: user or password wrong')
+    else if (user.communityId === null) return navigate('/invite')
+    else return navigate('/dashboard')
   }
 
   return (
