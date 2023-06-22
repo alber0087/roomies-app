@@ -1,8 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from 'react'
+import { getUserLogged } from '../../services/user.service'
 
-import profilePic from '../../assets/alber2.jpg'
-import communityPic from '../../assets/apartment.jpeg'
 
 import './Card.css'
 
@@ -10,6 +9,16 @@ const API_KEY = 'AIzaSyAw-aTPzbceFSmmS4_JNjSO0j7UHv4sgP4'
 
 function Card({ community, users }) {
   const [showCard, setShowCard] = useState(false)
+  const [profile, setProfile] = useState([])
+
+const getUser = async () => {
+  const res = await getUserLogged()
+  setProfile(res)
+}
+
+useEffect(() => {
+  getUser()
+},[profile])
 
   useEffect(() => {
     const handleResize = () => {
@@ -59,7 +68,7 @@ function Card({ community, users }) {
     <div className="wrapper">
       <div className="card-header">
         <div className="profile-photo-wrapper">
-          <img src={profilePic} />
+          <img src={profile.image} />
         </div>
         <div className="community-name">
           <div>{community.name}</div>
@@ -68,7 +77,7 @@ function Card({ community, users }) {
       </div>
       <div className="card-body">
         <div className="img-card">
-          <img src={communityPic} />
+          <img src={community.image} />
         </div>
         {showCard && <CommunityInfo />}
         <CommunityMembers />

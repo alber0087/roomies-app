@@ -3,8 +3,8 @@ import './EditBtn.css'
 
 function EditBtn({onClick}) {
   return (
-    <div className="edit-btn-wrapper">
-      <button className="edit-btn" onClick={onClick} >
+    <div className="back-btn-wrapper">
+      <button className="back-btn" onClick={onClick} >
         Edit
       </button>
     </div>
