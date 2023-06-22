@@ -10,6 +10,7 @@ import AddExpensePage from "../pages/AddExpensePage/AddExpensePage"
 import Tasks from '../pages/Tasks/Tasks'
 import CreateCommunity from "../pages/CreateCommunityPage/CreateCommunity"
 import InviteUser from "../pages/InviteUserPage/InviteUser"
+import ProfilePage from "../pages/ProfilePage/ProfilePage"
 
 
 const checkLogged = () => {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: '/tasks',
         element: <Tasks />
+      },
+      {
+        path: '/profile',
+        element: <ProfilePage />
       },
     /*   {
         path: '/chat',

@@ -5,7 +5,7 @@ export const getUsersByCommunityId = async () => {
     const { data } = await api.get('/communities/profile/users', {
       headers: {
         token: localStorage.getItem('token'),
-      }
+      },
     })
     return data.users.users
   } catch (err) {
@@ -31,10 +31,39 @@ export const getUserLogged = async () => {
     const { data } = await api.get('/users/profile', {
       headers: {
         token: localStorage.getItem('token'),
-      }
+      },
     })
     return data
   } catch (err) {
     console.error('Cannot get user logged', err)
   }
+}
+
+export const updateUserService = async (
+  id,
+  name,
+  lastName,
+  resultSmoker,
+  description,
+  resultGender,
+  resultBirthday,
+  resultImage
+) => {
+  await api.put(
+    `/users/profile/${id}`,
+    {
+      firstName: name,
+      lastName,
+      smoker: resultSmoker,
+      description,
+      gender: resultGender,
+      birth_date: resultBirthday,
+      image: resultImage,
+    },
+    {
+      headers: {
+        token: localStorage.getItem('token'),
+      },
+    }
+  )
 }

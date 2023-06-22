@@ -1,0 +1,15 @@
+.image-profile{
+  display: flex;
+  justify-content: center;
+}
+.data-profile{
+  margin: 0 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 4px;
+}
+.description{
+
+  margin: 0 24px;
+}
