@@ -8,7 +8,7 @@ function Checkbox({ onChange, defaultChecked }) {
       <input
         type="checkbox"
         onChange={onChange}
-        defaultChecked={defaultChecked}
+        checked={!defaultChecked}
       />
       <span className='checkmark'></span>
     </div>
