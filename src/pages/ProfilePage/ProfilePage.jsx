@@ -19,7 +19,7 @@ function ProfilePage() {
         <div className="wrapper">
           <EditBtn onClick={changeComponent} />
           <div className="image-profile">
-            <img width={200} src={person.image} alt="Imagen de perfil" />
+            <img width={200} height={200} src={person.image} alt="Imagen de perfil" />
           </div>
           <div
             style={{

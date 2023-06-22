@@ -10,6 +10,7 @@ import './EditProfile.css'
 import { useEffect, useState } from 'react'
 import { updateUserService } from '../../../services/user.service'
 import ImageUploader from '../ImageImput/ImageImput'
+import PrimaryBtn from '../../../components/PrimaryBtn/PrimaryBtn'
 
 function EditProfile({ person, setPerson, setProfile, sendData }) {
   const [name, setName] = useState('')
@@ -194,7 +195,8 @@ function EditProfile({ person, setPerson, setProfile, sendData }) {
             value={description}
             onChange={handleDescription}
           />
-          <button onClick={updateProfile}>Update Profile</button>
+          <br/>
+          <PrimaryBtn callToAction={updateProfile} value={'Update Profile'} />
         </div>
       </div>
     </div>
