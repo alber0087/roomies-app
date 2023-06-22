@@ -13,11 +13,11 @@ export const joinCommunity = async (id) => {
   )
 }
 
-export const createCommunity = async (name, selectedCity, address, rooms) => {
+export const createCommunity = async (name, selectedCity, address, rooms,image) => {
   try {
     await api.post(
       '/communities/profile',
-      { name, city: selectedCity, address, rooms },
+      { name, city: selectedCity, address, rooms, image },
       {
         headers: {
           token: localStorage.getItem('token'),
