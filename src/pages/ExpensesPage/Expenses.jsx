@@ -22,6 +22,7 @@ import {
 } from '@mui/material'
 import './Expenses.css'
 import PrimaryBtn from '../../components/PrimaryBtn/PrimaryBtn'
+import Spinner from '../../components/Spinner/Spinner'
 
 function Expenses() {
   const [expenses, setExpenses] = useState([])
@@ -206,7 +207,7 @@ function Expenses() {
               </Typography> 
             </div>
           </div>
-          {expenses?.length > 0 &&
+          {expenses?.length > 0 ?
             expenses.map((e) => (
               <Accordion key={e.id}>
                 <AccordionSummary>
@@ -230,7 +231,7 @@ function Expenses() {
                 </AccordionSummary>
                 <AccordionDetails>{debtDivision(e)}</AccordionDetails>
               </Accordion>
-            ))}
+            )) : <Spinner />}
         </div>
       </Box>
         <Link to="/expenses/addexpense">
