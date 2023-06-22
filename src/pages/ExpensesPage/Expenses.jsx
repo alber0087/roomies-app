@@ -46,6 +46,7 @@ function Expenses() {
 
   const expensePaidFunc = async (id) => {
     await expensePaid(id)
+    listExpenses()
   }
 
   const getUserLoggedFunc = async () => {
@@ -212,7 +213,7 @@ function Expenses() {
                     <div className='card-content'>
                       <div>{e.name}</div>
                       <div className='price'>
-                        <div className={e.community_expense.status === 'Paid' ? 'paid' : ''}>{calculateExpense(e).toFixed(2)} €</div>
+                        <div className={e.community_expense.status === 'Paid' ? 'paid' : ''}>{calculateExpense(e).toFixed(2).replace('.', ',')} €</div>
                         {/*                         <Button
                             variant="contained"
                             onClick={() => deleteExpenseFunc(e.id)}
