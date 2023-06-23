@@ -18,7 +18,11 @@ function InviteUser() {
 
   
   const handleInvite = (e) => {
-    const id = e.target.value
+    const url = e.target.value
+    const searchNumber = Array.from(url).filter((char) =>
+      /\d/.test(char)
+    )
+    const id = searchNumber.join('')
     setId(id)
   }
 

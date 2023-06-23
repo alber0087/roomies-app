@@ -66,15 +66,16 @@ function EditProfile({ person, setPerson, setProfile, sendData }) {
     }
   }
 
+
   const resultImage = validateImage()
 
   const updateProfile = async () => {
     await updateUserService(
       id,
-      name,
+      resultName,
       lastName,
       resultSmoker,
-      description,
+      resultDescription,
       resultGender,
       resultBirthday,
       resultImage
@@ -82,8 +83,29 @@ function EditProfile({ person, setPerson, setProfile, sendData }) {
     changeComponent()
   }
 
+  const validateFirstName = () => {
+    if (name && person.firstName === null) {
+      return 'Empty'
+    } else if (name === '' && person.firstName !== null) {
+      return person.firstName
+    } else {
+      return name
+    }
+  }
+
+    const validateDescription = () => {
+      if (description && person.description === null) {
+        return ''
+      } else if (description === '' && person.description !== null) {
+        return person.description
+      } else {
+        return description
+      }
+    }
+
+
   const validateGender = () => {
-    if (person && person.gender === null) {
+    if (gender && person.gender === null) {
       return 'Other'
     } else if (gender === '' && person.gender !== null) {
       return person.gender
@@ -93,7 +115,7 @@ function EditProfile({ person, setPerson, setProfile, sendData }) {
   }
 
   const validateSmoker = () => {
-    if (person && person.smoker === null) {
+    if (smoker && person.smoker === null) {
       return 'No'
     } else if (smoker === '' && person.smoker !== null) {
       return person.smoker
@@ -103,8 +125,8 @@ function EditProfile({ person, setPerson, setProfile, sendData }) {
   }
 
   const validateBirthday = () => {
-    if (person && person.birth_date === null) {
-      return null
+    if (birthday && person.birth_date === null) {
+      return ''
     } else if (birthday === '' && person.birth_date !== null) {
       return person.birth_date
     } else {
@@ -112,11 +134,12 @@ function EditProfile({ person, setPerson, setProfile, sendData }) {
     }
   }
 
+  const resultDescription = validateDescription()
+  const resultName = validateFirstName()
   const resultBirthday = validateBirthday()
   const resultGender = validateGender()
   const resultSmoker = validateSmoker()
-
-  sendData(resultImage)
+  sendData(resultName)
 
   return (
     <div className="container">
@@ -136,7 +159,7 @@ function EditProfile({ person, setPerson, setProfile, sendData }) {
             size="small"
             label="First Name"
             type="text"
-            value={name}
+            value={resultName}
             onChange={handleName}
           />
           <TextField
@@ -196,7 +219,7 @@ function EditProfile({ person, setPerson, setProfile, sendData }) {
             label="Description"
             multiline
             rows={4}
-            value={description}
+            value={resultDescription}
             onChange={handleDescription}
           />
           <br />
