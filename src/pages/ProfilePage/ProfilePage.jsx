@@ -24,46 +24,46 @@ function ProfilePage() {
       <div className="container">
         <div className="wrapper wrapper-profile">
           <EditBtn onClick={changeComponent} />
-          {person.image ? (
-            <div className="image-profile">
-              <img
-                width={160}
-                height={160}
-                src={person.image}
-                alt="Imagen de perfil"
-              />
-            </div>
-          ) : (
-            <Spinner />
-          )}
-          <div className="user-name">{person.firstName}</div>
-          <div className="data-profile">
-            <div className="space">
-              <span className="strong">Birthday: </span>
-              <div>
-                {person.birth_date === null ? 'Empty' : person.birth_date}
+          <div className='flexbox'>
+            {person.image && (
+              <div className="image-profile">
+                <img
+                  width={160}
+                  height={160}
+                  src={person.image}
+                  alt="Imagen de perfil"
+                />
+              </div>
+            )}
+            <div className="user-name">{person.firstName}</div>
+            <div className="data-profile">
+              <div className="space">
+                <span className="strong">Birthday: </span>
+                <div>
+                  {person.birth_date === null ? 'Empty' : person.birth_date}
+                </div>
+              </div>
+              <div className='space'>
+                <span className="strong">Gender: </span>
+                <div>
+                  {person.gender === null ? 'Empty' : person.gender}
+                </div>
+              </div>
+              <div className='space'>
+                <span className="strong">Smoker: </span>
+                <div>
+                  {person.smoker === null ? 'Empty' : person.smoker}
+                </div>
               </div>
             </div>
-            <div className='space'>
-              <span className="strong">Gender: </span>
-              <div>
-                {person.gender === null ? 'Empty' : person.gender}
-              </div>
-            </div>
-            <div className='space'>
-              <span className="strong">Smoker: </span>
-              <div>
-                {person.smoker === null ? 'Empty' : person.smoker}
-              </div>
-            </div>
-          </div>
 
-          <div className="description">
-            <span className="strong">Description :</span>
-            <div className="description">{person.description}</div>
-          </div>
-          <div className='logout-btn'>
-            <PrimaryBtn value={'Logout'} callToAction={logout} />
+            <div className="description">
+              <span className="strong">Description :</span>
+              <div className="description">{person.description}</div>
+            </div>
+            <div className='logout-btn'>
+              <PrimaryBtn value={'Logout'} callToAction={logout} />
+            </div>
           </div>
         </div>
       </div>

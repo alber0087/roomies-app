@@ -6,6 +6,13 @@
   max-width: 600px;
 }
 
+.flexbox {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
 .image-profile {
   display: flex;
   justify-content: center;
