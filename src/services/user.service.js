@@ -55,10 +55,10 @@ export const getUsers = async () => {
 
 export const updateUserService = async (
   id,
-  name,
+  resultName,
   lastName,
   resultSmoker,
-  description,
+  resultDescription,
   resultGender,
   resultBirthday,
   resultImage
@@ -66,10 +66,10 @@ export const updateUserService = async (
   await api.put(
     `/users/profile/${id}`,
     {
-      firstName: name,
+      firstName: resultName,
       lastName,
       smoker: resultSmoker,
-      description,
+      description: resultDescription,
       gender: resultGender,
       birth_date: resultBirthday,
       image: resultImage,
