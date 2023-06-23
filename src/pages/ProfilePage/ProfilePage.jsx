@@ -4,11 +4,20 @@ import { useEffect, useState } from 'react'
 import EditBtn from './EditBtn/EditBtn'
 import EditProfile from './EditProfile/EditProfile'
 import Spinner from '../../components/Spinner/Spinner'
+import { useNavigate } from 'react-router-dom'
+import PrimaryBtn from '../../components/PrimaryBtn/PrimaryBtn'
 
 function ProfilePage() {
   const [person, setPerson] = useState([])
   const [profile, setProfile] = useState(false)
   const [image, setImage] = useState('')
+
+  const navigate = useNavigate()
+
+  const logout = () => {
+    localStorage.removeItem('token')
+    navigate('/login')
+  }
 
   function Profile() {
     return (
@@ -52,6 +61,9 @@ function ProfilePage() {
           <div className="description">
             <span className="strong">Description :</span>
             <div className="description">{person.description}</div>
+          </div>
+          <div className='logout-btn'>
+            <PrimaryBtn value={'Logout'} callToAction={logout} />
           </div>
         </div>
       </div>

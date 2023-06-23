@@ -15,12 +15,10 @@ function AddExpensePage() {
 
   const handleExpense = (e) => {
     setExpense(e.target.value)
-    console.log(expense)
   }
 
   const handlePrice = (e) => {
     setPrice(e.target.value)
-    console.log(price)
   }
 
   const addExpenseFunc = async () => {
