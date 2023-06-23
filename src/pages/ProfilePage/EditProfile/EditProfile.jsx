@@ -84,9 +84,7 @@ function EditProfile({ person, setPerson, setProfile, sendData }) {
   }
 
   const validateFirstName = () => {
-    if (name && person.firstName === null) {
-      return 'Empty'
-    } else if (name === '' && person.firstName !== null) {
+     if (name === '' && person.firstName !== null) {
       return person.firstName
     } else {
       return name
@@ -94,9 +92,8 @@ function EditProfile({ person, setPerson, setProfile, sendData }) {
   }
 
     const validateDescription = () => {
-      if (description && person.description === null) {
-        return ''
-      } else if (description === '' && person.description !== null) {
+     
+      if (description === '' && person.description !== null) {
         return person.description
       } else {
         return description
@@ -105,9 +102,8 @@ function EditProfile({ person, setPerson, setProfile, sendData }) {
 
 
   const validateGender = () => {
-    if (gender && person.gender === null) {
-      return 'Other'
-    } else if (gender === '' && person.gender !== null) {
+   
+    if (gender === '' && person.gender !== null) {
       return person.gender
     } else {
       return gender
@@ -115,9 +111,8 @@ function EditProfile({ person, setPerson, setProfile, sendData }) {
   }
 
   const validateSmoker = () => {
-    if (smoker && person.smoker === null) {
-      return 'No'
-    } else if (smoker === '' && person.smoker !== null) {
+
+     if (smoker === '' && person.smoker !== null) {
       return person.smoker
     } else {
       return smoker
@@ -125,14 +120,14 @@ function EditProfile({ person, setPerson, setProfile, sendData }) {
   }
 
   const validateBirthday = () => {
-    if (birthday && person.birth_date === null) {
-      return ''
-    } else if (birthday === '' && person.birth_date !== null) {
+    if (birthday === '' && person.birth_date !== null) {
       return person.birth_date
     } else {
       return birthday
     }
   }
+
+ 
 
   const resultDescription = validateDescription()
   const resultName = validateFirstName()
@@ -140,6 +135,15 @@ function EditProfile({ person, setPerson, setProfile, sendData }) {
   const resultGender = validateGender()
   const resultSmoker = validateSmoker()
   sendData(resultName)
+
+  
+ useEffect(() => {
+   validateDescription()
+   validateFirstName()
+   validateBirthday()
+   validateGender()
+   validateSmoker()
+ }, [description, name, birthday, gender, smoker])
 
   return (
     <div className="container">
